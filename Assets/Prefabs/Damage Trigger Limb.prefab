@@ -65,8 +65,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4561153305667413209, guid: 4139b5936c9fd454689ac317357eb31d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4561153305667413209, guid: 4139b5936c9fd454689ac317357eb31d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.3
+      value: 0.524
       objectReference: {fileID: 0}
     - target: {fileID: 5721867876082122925, guid: 4139b5936c9fd454689ac317357eb31d, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.y
@@ -75,7 +79,19 @@ PrefabInstance:
     - target: {fileID: 5982451803148495678, guid: 4139b5936c9fd454689ac317357eb31d, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+      objectReference: {fileID: 1557339490334213417, guid: 5ef53075c7985c5438c9580b2d334b19, type: 3}
+    - target: {fileID: 5982451803148495678, guid: 4139b5936c9fd454689ac317357eb31d, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982451803148495678, guid: 4139b5936c9fd454689ac317357eb31d, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982451803148495678, guid: 4139b5936c9fd454689ac317357eb31d, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1670049480025638081, guid: 4139b5936c9fd454689ac317357eb31d, type: 3}
     - {fileID: 5721867876082122925, guid: 4139b5936c9fd454689ac317357eb31d, type: 3}
@@ -156,8 +172,8 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.28866667}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.4375, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -165,7 +181,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.5773587}
-      - {x: -0.5, y: -0.28866667}
-      - {x: 0.5, y: -0.28866667}
+    - - {x: 0.22301984, y: 0.023237824}
+      - {x: 0, y: 0.5465077}
+      - {x: -0.20820539, y: 0.024609804}
+      - {x: -0.24168697, y: -0.5046333}
+      - {x: 0.23321772, y: -0.5088679}
   m_UseDelaunayMesh: 1

@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 518e2a8534ef93145b9ea73c7fe09a48
+guid: 5ef53075c7985c5438c9580b2d334b19
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8380113457931478516
-    second: Tilemap Palette 2_0
+      213: 1557339490334213417
+    second: Basic Enemy Sprit sheet (1)_0
+  - first:
+      213: -4023227574765474276
+    second: Basic Enemy Sprit sheet (1)_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,12 +103,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tilemap Palette 2_0
+      name: Basic Enemy Sprit sheet (1)_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 64
-        width: 32
+        x: 9
+        y: 96
+        width: 14
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -115,14 +118,80 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4f5e97d4ac42c4470800000000000000
-      internalID: 8380113457931478516
+      spriteID: 9250f0ce308cc9510800000000000000
+      internalID: 1557339490334213417
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tilemap Palette 2_1
+      name: Basic Enemy Sprit sheet (1)_1
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 96
+        width: 14
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1e2c8336df9a28c0800000000000000
+      internalID: -4023227574765474276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Basic Enemy Sprit sheet (1)_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1f197fc7c826bf4fa236ea7c4da325b
+      internalID: 709452903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Basic Enemy Sprit sheet (1)_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34232cac43a786a449d663e02227cdde
+      internalID: -1174959643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Basic Enemy Sprit sheet (1)_4
       rect:
         serializedVersion: 2
         x: 32
@@ -137,19 +206,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03083468bd4b3ff42aa5087f9384c37c
-      internalID: 149504912
+      spriteID: 0f2920cda6cde6341b7f4413d2587830
+      internalID: -1096620694
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tilemap Palette 2_2
+      name: Basic Enemy Sprit sheet (1)_5
       rect:
         serializedVersion: 2
-        x: 64
+        x: 72
         y: 64
-        width: 32
+        width: 16
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -159,19 +228,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 017143cb86134494fadce98ca0947028
-      internalID: 294742017
+      spriteID: 608949a490694044c85d513d7ee11cd0
+      internalID: -627042100
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tilemap Palette 2_3
+      name: Basic Enemy Sprit sheet (1)_6
       rect:
         serializedVersion: 2
-        x: 0
+        x: 8
         y: 32
-        width: 32
+        width: 16
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -181,19 +250,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ab0cc95e406901449afd4f8d0743c0e0
-      internalID: 1584349595
+      spriteID: 505370e3ca5d2ae42a4c91225de35ee9
+      internalID: -330974726
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tilemap Palette 2_4
+      name: Basic Enemy Sprit sheet (1)_7
       rect:
         serializedVersion: 2
-        x: 32
+        x: 42
         y: 32
-        width: 32
+        width: 12
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -203,19 +272,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0e951b9bcf41ba4c9187b069c3c0718
-      internalID: 632441985
+      spriteID: b6413def80201b54cb87bd8bf85f291d
+      internalID: 1894035412
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tilemap Palette 2_5
+      name: Basic Enemy Sprit sheet (1)_8
       rect:
         serializedVersion: 2
-        x: 64
+        x: 73
         y: 32
-        width: 32
+        width: 14
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -225,19 +294,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8146d5bbf64eef9449851b7c422381f5
-      internalID: 1053838807
+      spriteID: 46f14890330687b4090b27a1da7856a3
+      internalID: 392954306
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tilemap Palette 2_6
+      name: Basic Enemy Sprit sheet (1)_9
       rect:
         serializedVersion: 2
-        x: 0
+        x: 9
         y: 0
-        width: 32
+        width: 14
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -247,30 +316,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1e973195ee675bd44815d060dcd34835
-      internalID: -66829942
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tilemap Palette 2_7
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1ecbc9c5c764bf5498275ae2fad2bf0a
-      internalID: 1305697259
+      spriteID: 5d7e2ac374ca1e44994dd5cc720bd3a8
+      internalID: -2039879556
       vertices: []
       indices: 
       edges: []
@@ -279,7 +326,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: eea5b4f861f4aa5419026418a2907641
+    spriteID: 9640e13f206bc444189c1889be6b008f
     internalID: 0
     vertices: []
     indices: 
@@ -291,14 +338,16 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Tilemap Palette 2_0: 8380113457931478516
-      Tilemap Palette 2_1: 149504912
-      Tilemap Palette 2_2: 294742017
-      Tilemap Palette 2_3: 1584349595
-      Tilemap Palette 2_4: 632441985
-      Tilemap Palette 2_5: 1053838807
-      Tilemap Palette 2_6: -66829942
-      Tilemap Palette 2_7: 1305697259
+      Basic Enemy Sprit sheet (1)_0: 1557339490334213417
+      Basic Enemy Sprit sheet (1)_1: -4023227574765474276
+      Basic Enemy Sprit sheet (1)_2: 709452903
+      Basic Enemy Sprit sheet (1)_3: -1174959643
+      Basic Enemy Sprit sheet (1)_4: -1096620694
+      Basic Enemy Sprit sheet (1)_5: -627042100
+      Basic Enemy Sprit sheet (1)_6: -330974726
+      Basic Enemy Sprit sheet (1)_7: 1894035412
+      Basic Enemy Sprit sheet (1)_8: 392954306
+      Basic Enemy Sprit sheet (1)_9: -2039879556
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
