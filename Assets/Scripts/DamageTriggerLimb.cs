@@ -11,19 +11,26 @@ public class DamageTriggerLimb : Limb
     public float cooldown;
     private float cooldownTimer;
 
+    public float hitKnockback;
+
+    private List<Health> hitBlacklist = new List<Health>();
+
     protected override void Update()
     {
         // Update cooldown timer
         cooldownTimer = Mathf.Max(cooldownTimer - Time.deltaTime, 0.0f);
+
+        // Clear blacklist when cooldown ends
+        if (cooldownTimer == 0.0f)
+        {
+            hitBlacklist.Clear();
+        }
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collider2D)
     {
-        // Check cooldown
-        if (OnCooldown()) return;
-
         // Get Rigidbody2D of other object
-        Rigidbody2D otherRb = collision.rigidbody;
+        Rigidbody2D otherRb = collider2D.attachedRigidbody;
 
         if (!otherRb) return;
 
@@ -35,15 +42,20 @@ public class DamageTriggerLimb : Limb
         // Don't damage teammates
         if (otherHealth.GetMaskTeam() == GetMaskTeam()) return;
 
+        // Don't damage the same health component multiple times during cooldown
+        if (hitBlacklist.Contains(otherHealth)) return;
+
+        // Add to blacklist
+        hitBlacklist.Add(otherHealth);
+
         // Deal damage
         otherHealth.TakeDamage(damage);
 
+        // Apply knockback
+        Vector2 knockbackDirection = (rb.position - otherRb.position).normalized;
+        body.velocity = knockbackDirection * hitKnockback;
+
         // Start cooldown
         cooldownTimer = cooldown;
-    }
-
-    public bool OnCooldown()
-    {
-        return cooldownTimer > 0.0f;
     }
 }

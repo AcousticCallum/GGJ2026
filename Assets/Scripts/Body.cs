@@ -195,6 +195,9 @@ public class Body : MonoBehaviour
     {
         dying = true;
         deathTimer = deathDelay;
+
+        targetVelocity = Vector2.zero;
+        targetRotation = rotation;
     }
 
     public void CancelDeath(bool resetLimbs = true)

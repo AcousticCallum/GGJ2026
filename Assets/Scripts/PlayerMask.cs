@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMask : Mask
 {
+    public static PlayerMask instance;
+
     [Space]
 
     public bool canAim;
@@ -14,10 +16,24 @@ public class PlayerMask : Mask
     private Vector2 mousePositionInput;
     private bool usingMouse;
 
+    protected override void Start()
+    {
+        base.Start();
+
+        // Do nothing if not the controller
+        if (!controller) return;
+
+        // Set instance
+        PlayerMask.instance = this;
+    }
+
     protected override void Update()
     {
         // Do nothing if not the controller
         if (!controller) return;
+
+        // Refresh instance
+        PlayerMask.instance = this;
 
         // Move and rotate the body based on input
         body.Move(moveInput);

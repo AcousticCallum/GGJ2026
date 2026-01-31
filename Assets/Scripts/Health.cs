@@ -24,6 +24,7 @@ public class Health : MonoBehaviour
         if (!CanDamage() || dead) return;
 
         health -= damage;
+        Debug.Log(gameObject.name + " took " + damage + " damage. Remaining health: " + health);
 
         if (health <= 0)
         {
@@ -41,7 +42,7 @@ public class Health : MonoBehaviour
 
     public bool CanDamage()
     {
-        return damageCooldownTimer <= 0.0f;
+        return damageCooldownTimer == 0.0f;
     }
 
     public void ResetHealth()
