@@ -225,11 +225,12 @@ MonoBehaviour:
   - {fileID: 8431027909728813074}
   - {fileID: 1352613244218377101}
   - {fileID: 4766712129148346512}
-  moveSpeed: 5
+  moveSpeed: 3.5
   moveAcceleration: 12
   rotateSpeed: 1
   velocity: {x: 0, y: 0}
   rotation: 0
+  spacingRadius: 2
   deathDelay: 3
   deathIndicator: {fileID: 8360531580550945871}
   switchable: 1

@@ -25,7 +25,12 @@ public class PlayerMask : Mask
         base.Start();
 
         // Do nothing if not the controller
-        if (!controller) return;
+        if (!controller)
+        {
+            PlayerInput playerInput = GetComponent<PlayerInput>();
+            playerInput.enabled = false;
+            return;
+        }
 
         // Set instance
         if (PlayerMask.instance != this)
@@ -42,7 +47,12 @@ public class PlayerMask : Mask
     protected override void Update()
     {
         // Do nothing if not the controller
-        if (!controller) return;
+        if (!controller)
+        {
+            PlayerInput playerInput = GetComponent<PlayerInput>();
+            playerInput.enabled = false;
+            return;
+        }
 
         // Refresh instance
         if (PlayerMask.instance != this)
@@ -165,6 +175,7 @@ public class PlayerMask : Mask
     {
         float bestDistance = float.MaxValue;
         Body bestBody = null;
+        Body.allBodies.RemoveAll(item => item == null);
         foreach (Body checkBody in Body.allBodies)
         {
             if (!checkBody || !checkBody.rb || checkBody.IsMasked() || !checkBody.switchable) continue;

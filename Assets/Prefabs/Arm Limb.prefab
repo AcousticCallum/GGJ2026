@@ -474,10 +474,12 @@ MonoBehaviour:
   destroyed: 0
   handTarget: {fileID: 3099303211498418493}
   hand: {fileID: 3983220233315508910}
+  targetOffset: {x: 0, y: 0}
   speed: 4
   length: 1.75
-  wiggleSpeed: 0.5
-  wiggleLength: 5
+  minimumLength: 0.875
+  swingRate: 0.5
+  swingAngle: 45
   flipOnOppositeSide: 1
   opposingLimbs: []
   solver: {fileID: 6317692958434097202}

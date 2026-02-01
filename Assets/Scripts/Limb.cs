@@ -39,6 +39,13 @@ public class Limb : MonoBehaviour
 
         // Reset health
         if (health) health.ResetHealth();
+
+        OnAdd();
+    }
+
+    protected virtual void OnAdd()
+    {
+        // Override in subclasses
     }
 
     public void Remove()
@@ -46,6 +53,13 @@ public class Limb : MonoBehaviour
         destroyed = true;
 
         gameObject.SetActive(false);
+
+        OnRemove();
+    }
+
+    protected virtual void OnRemove()
+    {
+        // Override in subclasses
     }
 
     public virtual void PrimaryAction()
