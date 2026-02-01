@@ -448,7 +448,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7777267749320968186, guid: c1af9ccd395102a42a61ac707e00bf2b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8913359534706749930, guid: c1af9ccd395102a42a61ac707e00bf2b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -564,6 +564,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7eb20342cd91afb4f8ebd8e9aa49c485, type: 3}
+--- !u!1001 &845079561
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2765974304833251564, guid: 8626333be238efa42aa84e877d4e9f31, type: 3}
+      propertyPath: addMaskPrefabOnStart
+      value: 
+      objectReference: {fileID: 8368609710332068793, guid: a2f4f6be6df82d04e893d5bd676098b8, type: 3}
+    - target: {fileID: 7777267749320968186, guid: 8626333be238efa42aa84e877d4e9f31, type: 3}
+      propertyPath: m_Name
+      value: Gun Fly Body
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913359534706749930, guid: 8626333be238efa42aa84e877d4e9f31, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.09876
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913359534706749930, guid: 8626333be238efa42aa84e877d4e9f31, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.7373
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913359534706749930, guid: 8626333be238efa42aa84e877d4e9f31, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913359534706749930, guid: 8626333be238efa42aa84e877d4e9f31, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913359534706749930, guid: 8626333be238efa42aa84e877d4e9f31, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913359534706749930, guid: 8626333be238efa42aa84e877d4e9f31, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913359534706749930, guid: 8626333be238efa42aa84e877d4e9f31, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913359534706749930, guid: 8626333be238efa42aa84e877d4e9f31, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913359534706749930, guid: 8626333be238efa42aa84e877d4e9f31, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913359534706749930, guid: 8626333be238efa42aa84e877d4e9f31, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8626333be238efa42aa84e877d4e9f31, type: 3}
 --- !u!1001 &881813403
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -603,6 +664,10 @@ PrefabInstance:
     - target: {fileID: 7777267749320968186, guid: 61a4f34bbb19baa45aa66990bb862780, type: 3}
       propertyPath: m_Name
       value: Sword Body (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7777267749320968186, guid: 61a4f34bbb19baa45aa66990bb862780, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7787097155883999956, guid: 61a4f34bbb19baa45aa66990bb862780, type: 3}
       propertyPath: m_LocalRotation.z
@@ -695,7 +760,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3179751561290397442, guid: 3327a94bcf76b8744bb326e461a62296, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4358435199325602066, guid: 3327a94bcf76b8744bb326e461a62296, type: 3}
       propertyPath: m_LocalPosition.x
@@ -821,6 +886,10 @@ PrefabInstance:
     - target: {fileID: 7777267749320968186, guid: 61a4f34bbb19baa45aa66990bb862780, type: 3}
       propertyPath: m_Name
       value: Sword Body
+      objectReference: {fileID: 0}
+    - target: {fileID: 7777267749320968186, guid: 61a4f34bbb19baa45aa66990bb862780, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7787097155883999956, guid: 61a4f34bbb19baa45aa66990bb862780, type: 3}
       propertyPath: m_LocalRotation.z
@@ -1006,6 +1075,63 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &2013414432
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7777267749320968186, guid: 8626333be238efa42aa84e877d4e9f31, type: 3}
+      propertyPath: m_Name
+      value: Gun Fly Body (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913359534706749930, guid: 8626333be238efa42aa84e877d4e9f31, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913359534706749930, guid: 8626333be238efa42aa84e877d4e9f31, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913359534706749930, guid: 8626333be238efa42aa84e877d4e9f31, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913359534706749930, guid: 8626333be238efa42aa84e877d4e9f31, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913359534706749930, guid: 8626333be238efa42aa84e877d4e9f31, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913359534706749930, guid: 8626333be238efa42aa84e877d4e9f31, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913359534706749930, guid: 8626333be238efa42aa84e877d4e9f31, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913359534706749930, guid: 8626333be238efa42aa84e877d4e9f31, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913359534706749930, guid: 8626333be238efa42aa84e877d4e9f31, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913359534706749930, guid: 8626333be238efa42aa84e877d4e9f31, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8626333be238efa42aa84e877d4e9f31, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1019,3 +1145,5 @@ SceneRoots:
   - {fileID: 755985714}
   - {fileID: 1535562374}
   - {fileID: 881813403}
+  - {fileID: 845079561}
+  - {fileID: 2013414432}
