@@ -9,7 +9,7 @@ public class PlayerMask : Mask
 
     [Space]
 
-    public PlayerMask prefab;
+    public int prefabIndex;
 
     public bool canAim;
 
@@ -28,7 +28,15 @@ public class PlayerMask : Mask
         if (!controller) return;
 
         // Set instance
-        PlayerMask.instance = this;
+        if (PlayerMask.instance != this)
+        {
+            PlayerMask.instance = this;
+
+            // Refresh PlayerInput
+            PlayerInput playerInput = GetComponent<PlayerInput>();
+            playerInput.enabled = false;
+            playerInput.enabled = true;
+        }
     }
 
     protected override void Update()
@@ -37,7 +45,15 @@ public class PlayerMask : Mask
         if (!controller) return;
 
         // Refresh instance
-        PlayerMask.instance = this;
+        if (PlayerMask.instance != this)
+        {
+            PlayerMask.instance = this;
+
+            // Refresh PlayerInput
+            PlayerInput playerInput = GetComponent<PlayerInput>();
+            playerInput.enabled = false;
+            playerInput.enabled = true;
+        }
 
         // Move and rotate the body based on input
         body.Move(moveInput);
@@ -99,17 +115,27 @@ public class PlayerMask : Mask
 
     public void OnPrimaryAction(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (ctx.started)
         {
             body.PrimaryAction();
+        }
+
+        if (ctx.canceled)
+        {
+            body.PrimaryActionEnd();
         }
     }
 
     public void OnSecondaryAction(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (ctx.started)
         {
             body.SecondaryAction();
+        }
+
+        if (ctx.canceled)
+        {
+            body.SecondaryActionEnd();
         }
     }
 
@@ -169,7 +195,7 @@ public class PlayerMask : Mask
         {
             // Switch to bestBody
             body.switchable = false;
-            bestBody.AddMask(prefab);
+            bestBody.AddMask(Prefabs.instance.maskPrefabs[prefabIndex]);
             body.RemoveMask(this, true);
 
             // Refresh PlayerInput
@@ -181,5 +207,20 @@ public class PlayerMask : Mask
         Time.timeScale = 1.0f;
 
         switching = false;
+    }
+
+    public Vector2 GetMousePosition()
+    {
+        return mousePositionInput;
+    }
+
+    public Vector2 GetLook()
+    {
+        return lookInput;
+    }
+
+    public bool IsUsingMouse()
+    {
+        return usingMouse;
     }
 }

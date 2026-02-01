@@ -94,7 +94,8 @@ MonoBehaviour:
   maskTeam: 1
   body: {fileID: 0}
   controller: 0
-  prefab: {fileID: 8368609710332068793}
+  statBonuses: []
+  prefabIndex: 1
   canAim: 1
 --- !u!114 &3685250230627906352
 MonoBehaviour:

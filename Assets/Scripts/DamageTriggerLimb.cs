@@ -40,6 +40,8 @@ public class DamageTriggerLimb : Limb
 
     private void OnTriggerStay2D(Collider2D collider2D)
     {
+        if (!body.IsMasked()) return;
+
         if (!armed) return;
 
         // Get Rigidbody2D of other object
@@ -74,6 +76,8 @@ public class DamageTriggerLimb : Limb
 
     public override void PrimaryAction()
     {
+        if (!body.IsMasked()) return;
+
         if (!animator) return;
 
         if (cooldownTimer > 0.0f) return;

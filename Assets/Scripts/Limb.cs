@@ -53,7 +53,17 @@ public class Limb : MonoBehaviour
         // Override in subclasses
     }
 
+    public virtual void PrimaryActionEnd()
+    {
+        // Override in subclasses
+    }
+
     public virtual void SecondaryAction()
+    {
+        // Override in subclasses
+    }
+
+    public virtual void SecondaryActionEnd()
     {
         // Override in subclasses
     }

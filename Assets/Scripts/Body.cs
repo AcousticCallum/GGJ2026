@@ -68,6 +68,26 @@ public class Body : MonoBehaviour
         moveAccelerationMultiplier = 1.0f;
         rotateSpeedMultiplier = 1.0f;
 
+        // Apply stat bonuses from mask (only once)
+        if(IsMasked())
+        {
+            foreach (StatBonus statBonus in masks[0].statBonuses)
+            {
+                switch (statBonus.statBonusType)
+                {
+                    case StatBonus.StatBonusType.moveSpeed:
+                        moveSpeedMultiplier += statBonus.value;
+                        break;
+                    case StatBonus.StatBonusType.moveAcceleration:
+                        moveAccelerationMultiplier += statBonus.value;
+                        break;
+                    case StatBonus.StatBonusType.rotateSpeed:
+                        rotateSpeedMultiplier += statBonus.value;
+                        break;
+                }
+            }
+        }
+
         // Apply stat bonuses from limbs
         foreach (Limb limb in limbs)
         {
@@ -117,14 +137,15 @@ public class Body : MonoBehaviour
         rb.MoveRotation(rotation);
     }
 
-    public void Move(Vector2 direction)
+    public void Move(Vector2 movement)
     {
-        targetVelocity = moveSpeed * direction.normalized;
+        if (movement.magnitude > 1.0f) movement.Normalize();
+        targetVelocity = moveSpeed * movement;
     }
 
-    public void Rotate(float direction)
+    public void Rotate(float angle)
     {
-        targetRotation = direction;
+        targetRotation = angle;
         //if (targetRotation - rotation > 180.0f) targetRotation -= 360.0f;
         //else if (targetRotation - rotation < -180.0f) targetRotation += 360.0f;
     }
@@ -140,6 +161,17 @@ public class Body : MonoBehaviour
         }
     }
 
+    public void PrimaryActionEnd()
+    {
+        foreach (Limb limb in limbs)
+        {
+            // Skip destroyed limbs
+            if (limb.destroyed) continue;
+
+            limb.PrimaryActionEnd();
+        }
+    }
+
     public void SecondaryAction()
     {
         foreach (Limb limb in limbs)
@@ -148,6 +180,17 @@ public class Body : MonoBehaviour
             if (limb.destroyed) continue;
 
             limb.SecondaryAction();
+        }
+    }
+
+    public void SecondaryActionEnd()
+    {
+        foreach (Limb limb in limbs)
+        {
+            // Skip destroyed limbs
+            if (limb.destroyed) continue;
+
+            limb.SecondaryActionEnd();
         }
     }
 
@@ -160,10 +203,7 @@ public class Body : MonoBehaviour
             if (!forceAdd) return;
 
             // Remove current mask
-            while (masks.Count > 0)
-            {
-                RemoveMask(masks[0]);
-            }
+            RemoveMask(masks[0], true);
         }
 
         foreach (Transform slot in maskSlots)
@@ -212,7 +252,7 @@ public class Body : MonoBehaviour
         // Remove all masks if specified
         if (removeAll)
         {
-            RemoveMask(masks[0]);
+            RemoveMask(masks[0], true);
         }
     }
 

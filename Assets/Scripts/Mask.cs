@@ -11,6 +11,8 @@ public class Mask : MonoBehaviour
 
     public bool controller;
 
+    public StatBonus[] statBonuses;
+
     protected virtual void Start()
     {
         // Try to get Rigidbody2D and Health components
