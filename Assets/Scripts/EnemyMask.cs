@@ -7,6 +7,8 @@ public class EnemyMask : Mask
         // Do nothing if not the controller
         if (!controller) return;
 
+        if(!PlayerMask.instance) return;
+
         // Get direction from to player
         Vector2 playerPosition = PlayerMask.instance.body.rb.position;
         Vector2 direction = (playerPosition - body.rb.position).normalized;
@@ -14,5 +16,7 @@ public class EnemyMask : Mask
         // Move and rotate the body towards the player
         body.Move(direction);
         body.Rotate(Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90.0f);
+
+        body.PrimaryAction();
     }
 }
