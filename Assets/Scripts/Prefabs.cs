@@ -6,6 +6,8 @@ public class Prefabs : MonoBehaviour
 
     public Mask[] maskPrefabs;
 
+    public Body[] enemyPrefabs;
+
     private void Awake()
     {
         Prefabs.instance = this;

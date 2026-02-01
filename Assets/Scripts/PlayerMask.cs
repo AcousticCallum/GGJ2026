@@ -252,6 +252,8 @@ public class PlayerMask : Mask
 
     private void Die()
     {
+        PlayerMask.kills = 0;
+
         // Reload the scene if this is the last mask
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
