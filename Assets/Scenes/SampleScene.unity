@@ -460,7 +460,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1390277573942503801, guid: 3327a94bcf76b8744bb326e461a62296, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00000013315807
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1629181217070311554, guid: 3327a94bcf76b8744bb326e461a62296, type: 3}
       propertyPath: m_LocalRotation.z
@@ -468,7 +468,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2530066331108842731, guid: 3327a94bcf76b8744bb326e461a62296, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00000013315807
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3179751561290397442, guid: 3327a94bcf76b8744bb326e461a62296, type: 3}
       propertyPath: m_Name
@@ -524,7 +524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6672295909853390546, guid: 3327a94bcf76b8744bb326e461a62296, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00000013315807
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7038121284968142868, guid: 3327a94bcf76b8744bb326e461a62296, type: 3}
       propertyPath: addMaskPrefabOnStart
@@ -532,7 +532,7 @@ PrefabInstance:
       objectReference: {fileID: 8368609710332068793, guid: a2f4f6be6df82d04e893d5bd676098b8, type: 3}
     - target: {fileID: 7840514327365391168, guid: 3327a94bcf76b8744bb326e461a62296, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00000013315807
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8398993079538985702, guid: 3327a94bcf76b8744bb326e461a62296, type: 3}
       propertyPath: m_LocalRotation.z
