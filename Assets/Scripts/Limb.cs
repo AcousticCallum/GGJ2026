@@ -6,7 +6,6 @@ public class Limb : MonoBehaviour
     [HideInInspector] public Health health;
 
     public Body body;
-    private int index;
 
     public StatBonus[] statBonuses;
 
@@ -24,11 +23,6 @@ public class Limb : MonoBehaviour
     protected virtual void Update()
     {
         // Override in subclasses
-    }
-
-    public void SetIndex(int newIndex)
-    {
-        index = newIndex;
     }
 
     public void Add()
