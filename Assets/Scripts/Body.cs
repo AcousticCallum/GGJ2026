@@ -28,6 +28,8 @@ public class Body : MonoBehaviour
     [HideInInspector] public Vector2 velocity;
     [HideInInspector] public float rotation;
 
+    public float spacingRadius;
+
     [Space]
 
     public float deathDelay;
@@ -310,5 +312,11 @@ public class Body : MonoBehaviour
         }
 
         return Mask.MaskTeam.Neutral;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, spacingRadius);
     }
 }

@@ -74,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7685575129029164123, guid: f5337044e82049e40b165bf9e73d400c, type: 3}
       propertyPath: m_Name
-      value: Enemy Mask A
+      value: Enemy Mask C
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 254616223821848277, guid: f5337044e82049e40b165bf9e73d400c, type: 3}
@@ -107,6 +107,12 @@ MonoBehaviour:
   maskTeam: 2
   body: {fileID: 0}
   controller: 0
-  statBonuses: []
-  moveCooldown: 1.5
-  moveDuration: 0.4
+  statBonuses:
+  - statBonusType: 0
+    value: -0.6
+  - statBonusType: 1
+    value: -0.6
+  - statBonusType: 2
+    value: -0.8
+  moveCooldown: 0.6
+  moveDuration: 2

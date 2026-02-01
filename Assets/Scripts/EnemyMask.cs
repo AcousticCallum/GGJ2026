@@ -16,8 +16,24 @@ public class EnemyMask : Mask
         if(!PlayerMask.instance) return;
 
         // Get direction from to player
-        Vector2 playerPosition = PlayerMask.instance.body.rb.position;
-        Vector2 direction = (playerPosition - body.rb.position).normalized;
+        Vector2 targetPosition = PlayerMask.instance.body.rb.position;
+
+        // Apply spacing from other bodies on the same team
+        Body.allBodies.RemoveAll(item => item == null);
+        foreach (Body checkBody in Body.allBodies)
+        {
+            if (checkBody == body) continue;
+
+            // CheckBody is on player team
+            if (checkBody.GetMaskTeam() == MaskTeam.Friendly) continue;
+
+            if (Vector2.Distance(body.rb.position, checkBody.rb.position) < body.spacingRadius + checkBody.spacingRadius)
+            {
+                targetPosition = checkBody.rb.position + (body.spacingRadius + checkBody.spacingRadius) * (body.rb.position - checkBody.rb.position).normalized;
+            }
+        }
+
+        Vector2 direction = (targetPosition - body.rb.position).normalized;
 
         // Handle movement timing
         moveTimer = Mathf.Max(0.0f, moveTimer - Time.deltaTime);

@@ -135,7 +135,7 @@ MonoBehaviour:
   armed: 1
   damage: 1
   cooldown: 0.5
-  hitKnockback: 2
+  hitKnockback: 3
 --- !u!1 &8126772526879886794 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8244672203204711445, guid: 4139b5936c9fd454689ac317357eb31d, type: 3}
