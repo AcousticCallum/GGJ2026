@@ -9,6 +9,10 @@ public class PlayerMask : Mask
 
     [Space]
 
+    private static bool switching;
+
+    public static int kills;
+
     public int prefabIndex;
 
     public bool canAim;
@@ -18,7 +22,11 @@ public class PlayerMask : Mask
     private Vector2 mousePositionInput;
     private bool usingMouse;
 
-    private static bool switching;
+    [Space]
+
+    public float bodyTimer;
+    public float bodyTimerSlowdownMultiplier;
+    public float bodyTimerSlowdownDuration;
 
     protected override void Start()
     {
@@ -88,20 +96,30 @@ public class PlayerMask : Mask
             // Rotate towards moveInput
             if (moveInput != Vector2.zero) body.Rotate(Mathf.Atan2(moveInput.y, moveInput.x) * Mathf.Rad2Deg - 90.0f);
         }
-    }
 
-    public override void OnRemove()
-    {
-        // Call base.OnRemove() if this isn't the last mask
-        if (body.IsMasked() || switching)
+        // Handle body timer, negative pauses body timer
+        if (bodyTimer > 0.0f)
         {
-            base.OnRemove();
+            // Update body timer
+            bodyTimer = Mathf.Max(bodyTimer - Time.deltaTime, 0.0f);
 
-            return;
+            // Apply time slowdown effect
+            if (bodyTimer < bodyTimerSlowdownDuration)
+            {
+                float t = Mathf.InverseLerp(bodyTimerSlowdownDuration, 0.0f, bodyTimer);
+                Time.timeScale = Mathf.Lerp(1.0f, bodyTimerSlowdownMultiplier, t);
+            }
+            else
+            {
+                Time.timeScale = 1.0f;
+            }
+
+            // Check for body timer expiration
+            if (bodyTimer == 0.0f)
+            {
+                Die();
+            }
         }
-
-        // Reload the scene if this is the last mask
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void OnMove(InputAction.CallbackContext ctx)
@@ -167,8 +185,6 @@ public class PlayerMask : Mask
     private void StartSwitch()
     {
         switching = true;
-
-        Time.timeScale = 0.2f;
     }
 
     private void FinishSwitch()
@@ -209,15 +225,35 @@ public class PlayerMask : Mask
             bestBody.AddMask(Prefabs.instance.maskPrefabs[prefabIndex]);
             body.RemoveMask(this, true);
 
+            // Refresh body timer
+            bodyTimer = bestBody.playerMaskDuration;
+
             // Refresh PlayerInput
             PlayerInput playerInput = bestBody.masks[0].GetComponent<PlayerInput>();
             playerInput.enabled = false;
             playerInput.enabled = true;
         }
 
-        Time.timeScale = 1.0f;
-
         switching = false;
+    }
+
+    public override void OnRemove()
+    {
+        // Call base.OnRemove() if this isn't the last mask
+        if (body.IsMasked() || switching)
+        {
+            base.OnRemove();
+
+            return;
+        }
+
+        Die();
+    }
+
+    private void Die()
+    {
+        // Reload the scene if this is the last mask
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public Vector2 GetMousePosition()

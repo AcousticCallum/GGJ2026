@@ -402,6 +402,7 @@ MonoBehaviour:
   velocity: {x: 0, y: 0}
   rotation: 0
   spacingRadius: 2
+  playerMaskDuration: 10
   deathDelay: 3
   deathIndicator: {fileID: 8360531580550945871}
   switchable: 1

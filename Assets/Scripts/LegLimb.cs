@@ -79,7 +79,6 @@ public class LegLimb : Limb
             lastPos = (Vector2)transform.InverseTransformPoint(foot.position);
             currentPos = foot.position;
             targetPos = (Vector2)transform.InverseTransformPoint((Vector2)footTarget.position + prediction * body.velocity);
-            Debug.Log(prediction * body.velocity);
 
             // Distance constraint
             if (targetPos.magnitude > length) targetPos = length * targetPos.normalized;

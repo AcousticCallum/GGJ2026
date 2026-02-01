@@ -32,6 +32,10 @@ public class Body : MonoBehaviour
 
     [Space]
 
+    public float playerMaskDuration;
+
+    [Space]
+
     public float deathDelay;
 
     public GameObject deathIndicator;
@@ -271,7 +275,13 @@ public class Body : MonoBehaviour
         targetVelocity = Vector2.zero;
         targetRotation = rotation;
 
-        if (switchable) deathIndicator.SetActive(true);
+        if (switchable)
+        {
+            deathIndicator.SetActive(true);
+
+            // Increment kill count for player mask
+            PlayerMask.kills++;
+        }
     }
 
     public void CancelDeath(bool resetLimbs = true)
