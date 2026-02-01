@@ -9,12 +9,16 @@ public class PlayerMask : Mask
 
     [Space]
 
+    public PlayerMask prefab;
+
     public bool canAim;
 
     private Vector2 moveInput;
     private Vector2 lookInput;
     private Vector2 mousePositionInput;
     private bool usingMouse;
+
+    private static bool switching;
 
     protected override void Start()
     {
@@ -63,7 +67,7 @@ public class PlayerMask : Mask
     public override void OnRemove()
     {
         // Call base.OnRemove() if this isn't the last mask
-        if (body.IsMasked())
+        if (body.IsMasked() || switching)
         {
             base.OnRemove();
 
@@ -107,5 +111,75 @@ public class PlayerMask : Mask
         {
             body.SecondaryAction();
         }
+    }
+
+    public void OnSwitch(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+            StartSwitch();
+            return;
+        }
+
+        if (ctx.canceled)
+        {
+            FinishSwitch();
+            return;
+        }
+    }
+
+    private void StartSwitch()
+    {
+        switching = true;
+
+        Time.timeScale = 0.2f;
+    }
+
+    private void FinishSwitch()
+    {
+        float bestDistance = float.MaxValue;
+        Body bestBody = null;
+        foreach (Body checkBody in Body.allBodies)
+        {
+            if (!checkBody || !checkBody.rb || checkBody.IsMasked() || !checkBody.switchable) continue;
+
+            if (usingMouse)
+            {
+                Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(mousePositionInput);
+                float distance = Vector2.Distance(checkBody.rb.position, mouseWorldPos);
+
+                if (distance >= bestDistance) continue;
+
+                bestDistance = distance;
+                bestBody = checkBody;
+            }
+            else
+            {
+                Vector2 toCheckBody = (checkBody.rb.position - body.rb.position).normalized;
+                float distance = Vector2.Angle(lookInput, toCheckBody);
+
+                if (distance >= bestDistance) continue;
+
+                bestDistance = distance;
+                bestBody = checkBody;
+            }
+        }
+
+        if (bestBody != null)
+        {
+            // Switch to bestBody
+            body.switchable = false;
+            bestBody.AddMask(prefab);
+            body.RemoveMask(this, true);
+
+            // Refresh PlayerInput
+            PlayerInput playerInput = bestBody.masks[0].GetComponent<PlayerInput>();
+            playerInput.enabled = false;
+            playerInput.enabled = true;
+        }
+
+        Time.timeScale = 1.0f;
+
+        switching = false;
     }
 }

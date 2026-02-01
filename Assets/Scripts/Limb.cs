@@ -35,6 +35,8 @@ public class Limb : MonoBehaviour
     {
         destroyed = false;
 
+        gameObject.SetActive(true);
+
         // Reset health
         if (health) health.ResetHealth();
     }
@@ -42,6 +44,8 @@ public class Limb : MonoBehaviour
     public void Remove()
     {
         destroyed = true;
+
+        gameObject.SetActive(false);
     }
 
     public virtual void PrimaryAction()

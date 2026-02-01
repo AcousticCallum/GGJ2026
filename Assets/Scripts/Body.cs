@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class Body : MonoBehaviour
 {
+    public static List<Body> allBodies = new List<Body>();
+
     [HideInInspector] public Rigidbody2D rb;
 
     public Transform[] maskSlots;
@@ -29,20 +31,36 @@ public class Body : MonoBehaviour
 
     public float deathDelay;
 
+    public GameObject deathIndicator;
+
     private bool dying;
     private float deathTimer;
+
+    public bool switchable = true;
+
+    // Stat bonuses
+    private float moveSpeedMultiplier = 1.0f;
+    private float moveAccelerationMultiplier = 1.0f;
+    private float rotateSpeedMultiplier = 1.0f;
 
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        foreach (Limb limb in limbs)
+        {
+            limb.body = this;
+        }
+
+        Body.allBodies.Add(this);
     }
 
     protected virtual void Update()
     {
         // Initialise stat bonuses
-        float moveSpeedMultiplier = 1.0f;
-        float moveAccelerationMultiplier = 1.0f;
-        float rotateSpeedMultiplier = 1.0f;
+        moveSpeedMultiplier = 1.0f;
+        moveAccelerationMultiplier = 1.0f;
+        rotateSpeedMultiplier = 1.0f;
 
         // Apply stat bonuses from limbs
         foreach (Limb limb in limbs)
@@ -81,7 +99,7 @@ public class Body : MonoBehaviour
 
             if (deathTimer == 0.0f)
             {
-                Destroy(gameObject);
+                Die();
             }
         }
     }
@@ -159,7 +177,7 @@ public class Body : MonoBehaviour
         CancelDeath();
     }
 
-    public virtual void RemoveMask(Mask mask)
+    public virtual void RemoveMask(Mask mask, bool removeAll = false)
     {
         // Mask not found
         if (!masks.Contains(mask)) return;
@@ -184,6 +202,12 @@ public class Body : MonoBehaviour
 
         // Remove the mask
         mask.OnRemove();
+
+        // Remove all masks if specified
+        if (removeAll)
+        {
+            RemoveMask(masks[0]);
+        }
     }
 
     public bool IsMasked()
@@ -198,6 +222,8 @@ public class Body : MonoBehaviour
 
         targetVelocity = Vector2.zero;
         targetRotation = rotation;
+
+        if (switchable) deathIndicator.SetActive(true);
     }
 
     public void CancelDeath(bool resetLimbs = true)
@@ -213,6 +239,21 @@ public class Body : MonoBehaviour
                 limb.Add();
             }
         }
+
+        if (switchable) deathIndicator.SetActive(false);
+    }
+
+    public void Die()
+    {
+        Body.allBodies.Remove(this);
+
+        Destroy(gameObject);
+    }
+
+    public float GetAngularVelocity()
+    {
+        float nextRotation = Mathf.LerpAngle(rotation, targetRotation, rotateSpeedMultiplier * rotateSpeed * Time.deltaTime);
+        return (nextRotation - rotation) / Time.deltaTime;
     }
 
     public Mask.MaskTeam GetMaskTeam()

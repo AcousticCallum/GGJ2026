@@ -13,6 +13,10 @@ PrefabInstance:
       value: Damage Trigger Limb
       objectReference: {fileID: 0}
     - target: {fileID: 4020219471774488932, guid: 4139b5936c9fd454689ac317357eb31d, type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4020219471774488932, guid: 4139b5936c9fd454689ac317357eb31d, type: 3}
       propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2237828768300767327}
@@ -172,7 +176,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0}
     oldSize: {x: 0.4375, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
@@ -181,9 +185,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.22301984, y: 0.023237824}
-      - {x: 0, y: 0.5465077}
-      - {x: -0.20820539, y: 0.024609804}
-      - {x: -0.24168697, y: -0.5046333}
-      - {x: 0.23321772, y: -0.5088679}
+    - - {x: 0.2307595, y: 0.54179424}
+      - {x: 0, y: 1.068934}
+      - {x: -0.2236847, y: 0.52768695}
+      - {x: -0.16042066, y: 0.0023136735}
+      - {x: 0.1674307, y: 0.0019488931}
   m_UseDelaunayMesh: 1
