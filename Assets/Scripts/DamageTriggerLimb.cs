@@ -6,6 +6,10 @@ public class DamageTriggerLimb : Limb
 {
     [Space]
 
+    [HideInInspector] public Animator animator;
+
+    public bool armed = true;
+
     public int damage;
 
     public float cooldown;
@@ -14,6 +18,13 @@ public class DamageTriggerLimb : Limb
     public float hitKnockback;
 
     private List<Health> hitBlacklist = new List<Health>();
+
+    protected override void Start()
+    {
+        base.Start();
+
+        TryGetComponent(out animator);
+    }
 
     protected override void Update()
     {
@@ -29,6 +40,8 @@ public class DamageTriggerLimb : Limb
 
     private void OnTriggerStay2D(Collider2D collider2D)
     {
+        if (!armed) return;
+
         // Get Rigidbody2D of other object
         Rigidbody2D otherRb = collider2D.attachedRigidbody;
 
@@ -54,6 +67,18 @@ public class DamageTriggerLimb : Limb
         // Apply knockback
         Vector2 knockbackDirection = (rb.position - otherRb.position).normalized;
         body.velocity = knockbackDirection * hitKnockback;
+
+        // Start cooldown
+        cooldownTimer = cooldown;
+    }
+
+    public override void PrimaryAction()
+    {
+        if (!animator) return;
+
+        if (cooldownTimer > 0.0f) return;
+
+        animator.SetTrigger("Attack");
 
         // Start cooldown
         cooldownTimer = cooldown;

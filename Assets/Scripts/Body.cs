@@ -10,6 +10,7 @@ public class Body : MonoBehaviour
 
     public Transform[] maskSlots;
     public List<Mask> masks;
+    public Mask addMaskPrefabOnStart;
 
     [Space]
 
@@ -50,6 +51,11 @@ public class Body : MonoBehaviour
         foreach (Limb limb in limbs)
         {
             limb.body = this;
+        }
+
+        if (addMaskPrefabOnStart)
+        {
+            AddMask(addMaskPrefabOnStart);
         }
 
         Body.allBodies.Add(this);

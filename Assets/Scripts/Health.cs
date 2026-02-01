@@ -14,6 +14,11 @@ public class Health : MonoBehaviour
 
     public bool dead;
 
+    private void Start()
+    {
+        maxHealth = health;
+    }
+
     private void Update()
     {
         damageCooldownTimer = Mathf.Max(damageCooldownTimer - Time.deltaTime, 0.0f);
