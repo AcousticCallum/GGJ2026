@@ -99,7 +99,7 @@ MonoBehaviour:
   canAim: 1
   bodyTimer: 12
   bodyTimerSlowdownMultiplier: 0.1
-  bodyTimerSlowdownDuration: 3
+  bodyTimerSlowdownDuration: 1
 --- !u!114 &3685250230627906352
 MonoBehaviour:
   m_ObjectHideFlags: 0
