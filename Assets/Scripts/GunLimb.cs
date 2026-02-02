@@ -17,6 +17,8 @@ public class GunLimb : Limb
 
     protected override void Update()
     {
+        if (!body.IsMasked()) return;
+
         // Update cooldown timer
         cooldownTimer = Mathf.Max(cooldownTimer - Time.deltaTime, 0.0f);
 
@@ -32,6 +34,8 @@ public class GunLimb : Limb
 
     public override void PrimaryAction()
     {
+        if (!body.IsMasked()) return;
+
         if (cooldownTimer > 0.0f) return;
 
         shooting = true;
@@ -49,6 +53,8 @@ public class GunLimb : Limb
 
     public override void PrimaryActionEnd()
     {
+        if (!body.IsMasked()) return;
+
         shooting = false;
     }
 }

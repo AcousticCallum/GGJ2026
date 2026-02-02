@@ -7,6 +7,7 @@ public class DamageTriggerLimb : Limb
     [Space]
 
     [HideInInspector] public Animator animator;
+    private bool attacking;
 
     public bool armed = true;
 
@@ -28,6 +29,8 @@ public class DamageTriggerLimb : Limb
 
     protected override void Update()
     {
+        if(!body.IsMasked()) return;
+
         // Update cooldown timer
         cooldownTimer = Mathf.Max(cooldownTimer - Time.deltaTime, 0.0f);
 
@@ -36,6 +39,9 @@ public class DamageTriggerLimb : Limb
         {
             hitBlacklist.Clear();
         }
+
+        // Try to attack
+        Attack();
     }
 
     private void OnTriggerStay2D(Collider2D collider2D)
@@ -75,8 +81,32 @@ public class DamageTriggerLimb : Limb
         cooldownTimer = cooldown;
     }
 
+    protected override void OnAdd()
+    {
+        base.OnAdd();
+
+        attacking = false;
+    }
+
     public override void PrimaryAction()
     {
+        if (!body.IsMasked()) return;
+
+        attacking = true;
+    }
+
+    public override void PrimaryActionEnd()
+    {
+        if (!body.IsMasked()) return;
+
+        attacking = false;
+    }
+
+    // Do an attack
+    private void Attack()
+    {
+        if (!attacking) return;
+
         if (!body.IsMasked()) return;
 
         if (!animator) return;

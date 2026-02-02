@@ -5,6 +5,9 @@ public class EnemyMask : Mask
     public float moveCooldown;
     public float moveDuration;
 
+    public bool canStopPrimaryAction;
+    public bool canStopSecondaryAction;
+
     private float moveTimer;
     private bool moving;
 
@@ -44,6 +47,12 @@ public class EnemyMask : Mask
                 // Stop moving
                 moving = false;
                 moveTimer = moveCooldown;
+
+                // End primary action when stopping move
+                if (canStopPrimaryAction) body.PrimaryActionEnd();
+
+                // End secondary action when stopping move
+                if (canStopSecondaryAction) body.SecondaryActionEnd();
             }
             else
             {
@@ -53,7 +62,9 @@ public class EnemyMask : Mask
 
                 // Perform primary action when starting to move
                 body.PrimaryAction();
-                body.PrimaryActionEnd();
+
+                // Perform secondary action when starting to move
+                body.SecondaryAction();
             }
         }
 

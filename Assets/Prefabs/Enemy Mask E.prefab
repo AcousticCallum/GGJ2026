@@ -120,3 +120,5 @@ MonoBehaviour:
     value: -0.8
   moveCooldown: 0.8
   moveDuration: 1.6
+  canStopPrimaryAction: 1
+  canStopSecondaryAction: 0
