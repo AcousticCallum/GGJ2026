@@ -31,12 +31,14 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (!CanDamage() || dead) return;
-
-        health -= damage;
+        if (!CanDamage()) return;
 
         // Play damage sound
         SoundManager.instance.PlaySound(damageSound);
+
+        if (dead) return;
+
+        health -= damage;
 
         if (health <= 0)
         {

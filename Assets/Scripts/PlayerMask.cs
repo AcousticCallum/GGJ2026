@@ -1,3 +1,4 @@
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 using UnityEngine.InputSystem;
@@ -24,6 +25,7 @@ public class PlayerMask : Mask
 
     [Space]
 
+    public bool bodyTimerActive;
     public float bodyTimer;
     public float bodyTimerSlowdownMultiplier;
     public float bodyTimerSlowdownDuration;
@@ -98,7 +100,7 @@ public class PlayerMask : Mask
         }
 
         // Handle body timer, negative pauses body timer
-        if (bodyTimer > 0.0f)
+        if (bodyTimerActive && bodyTimer > 0.0f)
         {
             // Update body timer
             bodyTimer = Mathf.Max(bodyTimer - Time.deltaTime, 0.0f);

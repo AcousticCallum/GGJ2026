@@ -29,8 +29,17 @@ public class UIManager : MonoBehaviour
         PlayerMask playerMask = PlayerMask.instance;
         if (playerMask)
         {
+            if (playerMask.bodyTimerActive)
+            {
+                timerText.text = TimeSpan.FromSeconds(PlayerMask.instance.bodyTimer).ToString("ss\\.ff");
+                timerText.gameObject.SetActive(true);
+            }
+            else
+            {
+                timerText.text = "";
+                timerText.gameObject.SetActive(false);
+            }
 
-            timerText.text = TimeSpan.FromSeconds(PlayerMask.instance.bodyTimer).ToString("ss\\.ff");
             scoreText.text = "Kills: " + PlayerMask.kills;
         }
     }
