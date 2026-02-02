@@ -118,5 +118,5 @@ MonoBehaviour:
     value: 0.4
   - statBonusType: 2
     value: -0.8
-  moveCooldown: 0.5
-  moveDuration: 2
+  moveCooldown: 0.8
+  moveDuration: 1.6

@@ -362,11 +362,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7038121284968142868, guid: 3327a94bcf76b8744bb326e461a62296, type: 3}
       propertyPath: moveSpeed
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7038121284968142868, guid: 3327a94bcf76b8744bb326e461a62296, type: 3}
       propertyPath: rotateSpeed
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7038121284968142868, guid: 3327a94bcf76b8744bb326e461a62296, type: 3}
       propertyPath: limbs.Array.size
@@ -374,7 +374,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7038121284968142868, guid: 3327a94bcf76b8744bb326e461a62296, type: 3}
       propertyPath: moveAcceleration
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7038121284968142868, guid: 3327a94bcf76b8744bb326e461a62296, type: 3}
       propertyPath: 'limbs.Array.data[0]'

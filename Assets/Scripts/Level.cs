@@ -10,6 +10,31 @@ public class Level : MonoBehaviour
     public float spawnCooldown;
     private float spawnTimer;
 
+    public GameObject[] bushPrefabs;
+    public int bushCount;
+
+    private void Start()
+    {
+        int bushesPlaced = 0;
+        while (bushesPlaced < bushCount)
+        {
+            Vector3Int cellPosition = new Vector3Int
+            (
+                Random.Range(groundMap.cellBounds.xMin, groundMap.cellBounds.xMax),
+                Random.Range(groundMap.cellBounds.yMin, groundMap.cellBounds.yMax),
+                0
+            );
+
+            if (groundMap.HasTile(cellPosition))
+            {
+                GameObject bushPrefab = bushPrefabs[Random.Range(0, bushPrefabs.Length)];
+                Vector3 spawnPosition = groundMap.GetCellCenterWorld(cellPosition);
+                Instantiate(bushPrefab, spawnPosition, Quaternion.Euler(360.0f * Random.value * Vector3.forward), transform);
+                bushesPlaced++;
+            }
+        }
+    }
+
     private void Update()
     {
         spawnTimer -= Time.deltaTime;

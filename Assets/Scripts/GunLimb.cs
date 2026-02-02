@@ -9,15 +9,28 @@ public class GunLimb : Limb
     public float cooldown;
     private float cooldownTimer;
 
+    private bool shooting = false;
+
     protected override void Update()
     {
         // Update cooldown timer
         cooldownTimer = Mathf.Max(cooldownTimer - Time.deltaTime, 0.0f);
+
+        if(shooting) PrimaryAction();
+    }
+
+    protected override void OnAdd()
+    {
+        base.OnAdd();
+
+        shooting = false;
     }
 
     public override void PrimaryAction()
     {
         if (cooldownTimer > 0.0f) return;
+
+        shooting = true;
 
         // Instantiate projectile
         Projectile newProjectile = Instantiate(projectile, transform.position + transform.TransformVector(shootOffset), transform.rotation);
@@ -25,5 +38,10 @@ public class GunLimb : Limb
 
         // Reset cooldown timer
         cooldownTimer = cooldown;
+    }
+
+    public override void PrimaryActionEnd()
+    {
+        shooting = false;
     }
 }

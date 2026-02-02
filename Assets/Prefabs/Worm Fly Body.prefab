@@ -142,11 +142,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4529686199644903797, guid: 3569c6d5854603d4cbbc4e1688af0a47, type: 3}
       propertyPath: swingRate
-      value: 0.75
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 4529686199644903797, guid: 3569c6d5854603d4cbbc4e1688af0a47, type: 3}
       propertyPath: swingAngle
-      value: 60
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 4529686199644903797, guid: 3569c6d5854603d4cbbc4e1688af0a47, type: 3}
       propertyPath: minimumLength
@@ -155,6 +155,10 @@ PrefabInstance:
     - target: {fileID: 4529686199644903797, guid: 3569c6d5854603d4cbbc4e1688af0a47, type: 3}
       propertyPath: targetOffset.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4529686199644903797, guid: 3569c6d5854603d4cbbc4e1688af0a47, type: 3}
+      propertyPath: swingStartOffset
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4529686199644903797, guid: 3569c6d5854603d4cbbc4e1688af0a47, type: 3}
       propertyPath: flipOnOppositeSide
@@ -166,7 +170,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5579865484157207976, guid: 3569c6d5854603d4cbbc4e1688af0a47, type: 3}
       propertyPath: m_LocalScale.x
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5579865484157207976, guid: 3569c6d5854603d4cbbc4e1688af0a47, type: 3}
       propertyPath: m_LocalPosition.x
