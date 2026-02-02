@@ -401,12 +401,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5721867876082122925, guid: 4139b5936c9fd454689ac317357eb31d, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.375
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5982451803148495678, guid: 4139b5936c9fd454689ac317357eb31d, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 1894035412, guid: 5ef53075c7985c5438c9580b2d334b19, type: 3}
+      objectReference: {fileID: 5633007556953124078, guid: f6c9a12a4a25cb042b3944c35bc5f924, type: 3}
     - target: {fileID: 5982451803148495678, guid: 4139b5936c9fd454689ac317357eb31d, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -480,6 +480,7 @@ MonoBehaviour:
   minimumLength: 0.875
   swingRate: 0.5
   swingAngle: 45
+  swingStartOffset: 0
   flipOnOppositeSide: 1
   opposingLimbs: []
   solver: {fileID: 6317692958434097202}
