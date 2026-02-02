@@ -67,7 +67,8 @@ public class DamageTriggerLimb : Limb
         otherHealth.TakeDamage(damage);
 
         // Apply knockback
-        Vector2 knockbackDirection = (rb.position - otherRb.position).normalized;
+        //Vector2 knockbackDirection = (rb.position - otherRb.position).normalized;
+        Vector2 knockbackDirection = (rb.position - collider2D.ClosestPoint(rb.position)).normalized;
         body.velocity = knockbackDirection * hitKnockback;
 
         // Start cooldown

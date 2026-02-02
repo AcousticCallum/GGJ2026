@@ -165,6 +165,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5127031059428299050, guid: 3569c6d5854603d4cbbc4e1688af0a47, type: 3}
+      propertyPath: damageSound
+      value: Thud
+      objectReference: {fileID: 0}
+    - target: {fileID: 5127031059428299050, guid: 3569c6d5854603d4cbbc4e1688af0a47, type: 3}
       propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}

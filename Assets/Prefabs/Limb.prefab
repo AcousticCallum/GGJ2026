@@ -110,6 +110,8 @@ MonoBehaviour:
   health: 3
   damageCooldown: 0.1
   dead: 0
+  damageSound: Hit
+  deathSound: 
 --- !u!1 &8244672203204711445
 GameObject:
   m_ObjectHideFlags: 0

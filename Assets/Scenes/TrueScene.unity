@@ -1322,6 +1322,85 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1884180329
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1884180330}
+  - component: {fileID: 1884180331}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1884180330
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884180329}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1884180331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884180329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee17f0f36b48a244394c6155653858d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SoundManager
+  audioMixer: {fileID: 24100000, guid: 0ab5da7bdad4a9940941d426a9bb87d2, type: 2}
+  sounds:
+  - name: Die
+    clip: {fileID: 8300000, guid: fbcff9a1dfe2f6a469aa804ec850bdbb, type: 3}
+    source: {fileID: 0}
+    mixerGroup: {fileID: -6318166088932424223, guid: 0ab5da7bdad4a9940941d426a9bb87d2, type: 2}
+    loop: 0
+    volume: 0.8
+    pitch: 1
+    pitchVariation: 0.1
+  - name: Hit
+    clip: {fileID: 8300000, guid: 5a23dea164901924e8e5740c8c90b6ff, type: 3}
+    source: {fileID: 0}
+    mixerGroup: {fileID: -6318166088932424223, guid: 0ab5da7bdad4a9940941d426a9bb87d2, type: 2}
+    loop: 0
+    volume: 1
+    pitch: 1
+    pitchVariation: 0.1
+  - name: Shoot
+    clip: {fileID: 8300000, guid: 5309f785f1fd1cc42968256cc313ec77, type: 3}
+    source: {fileID: 0}
+    mixerGroup: {fileID: -6318166088932424223, guid: 0ab5da7bdad4a9940941d426a9bb87d2, type: 2}
+    loop: 0
+    volume: 0.7
+    pitch: 2
+    pitchVariation: 0.1
+  - name: Thud
+    clip: {fileID: 8300000, guid: 210d32ea7c8bee94a813406d29439d19, type: 3}
+    source: {fileID: 0}
+    mixerGroup: {fileID: -6318166088932424223, guid: 0ab5da7bdad4a9940941d426a9bb87d2, type: 2}
+    loop: 0
+    volume: 1.1
+    pitch: 0.75
+    pitchVariation: 0.1
+  blacklistClearCooldown: 0.05
 --- !u!1001 &1968666602
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1541,14 +1620,15 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1884180330}
   - {fileID: 1699681731}
+  - {fileID: 1212135272}
+  - {fileID: 615863999}
+  - {fileID: 1863942637}
   - {fileID: 619394802}
   - {fileID: 1604811982}
   - {fileID: 519420032}
   - {fileID: 1968666602}
-  - {fileID: 1212135272}
-  - {fileID: 615863999}
-  - {fileID: 1863942637}
   - {fileID: 136083923}
   - {fileID: 4376823852221809776}
   - {fileID: 248840455940776513}

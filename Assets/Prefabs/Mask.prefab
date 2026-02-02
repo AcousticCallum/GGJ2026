@@ -324,3 +324,5 @@ MonoBehaviour:
   health: 1
   damageCooldown: 0.1
   dead: 0
+  damageSound: 
+  deathSound: Die

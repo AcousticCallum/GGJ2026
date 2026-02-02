@@ -14,6 +14,11 @@ public class Health : MonoBehaviour
 
     public bool dead;
 
+    [Space]
+
+    public string damageSound;
+    public string deathSound;
+
     private void Start()
     {
         maxHealth = health;
@@ -29,7 +34,9 @@ public class Health : MonoBehaviour
         if (!CanDamage() || dead) return;
 
         health -= damage;
-        Debug.Log(gameObject.name + " took " + damage + " damage. Remaining health: " + health);
+
+        // Play damage sound
+        SoundManager.instance.PlaySound(damageSound);
 
         if (health <= 0)
         {
@@ -41,6 +48,9 @@ public class Health : MonoBehaviour
     {
         if (dead) return;
         dead = true;
+
+        // Play death sound
+        SoundManager.instance.PlaySound(deathSound);
 
         onDeath.Invoke();
     }

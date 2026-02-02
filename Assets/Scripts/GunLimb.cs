@@ -11,6 +11,10 @@ public class GunLimb : Limb
 
     private bool shooting = false;
 
+    [Space]
+
+    public string shootSound;
+
     protected override void Update()
     {
         // Update cooldown timer
@@ -35,6 +39,9 @@ public class GunLimb : Limb
         // Instantiate projectile
         Projectile newProjectile = Instantiate(projectile, transform.position + transform.TransformVector(shootOffset), transform.rotation);
         newProjectile.maskTeam = GetMaskTeam();
+
+        // Play shoot sound
+        SoundManager.instance.PlaySound(shootSound);
 
         // Reset cooldown timer
         cooldownTimer = cooldown;
