@@ -463,6 +463,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2380461890420155042, guid: 1e702155393f04244b59ce55aabba582, type: 3}
+      propertyPath: connectedArm
+      value: 
+      objectReference: {fileID: 4275164350148313078}
     - target: {fileID: 3734456209344228889, guid: 1e702155393f04244b59ce55aabba582, type: 3}
       propertyPath: m_Name
       value: Small Mandible Limb
@@ -613,6 +617,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2380461890420155042, guid: 1e702155393f04244b59ce55aabba582, type: 3}
+      propertyPath: connectedArm
+      value: 
+      objectReference: {fileID: 8926138457429448656}
     - target: {fileID: 3734456209344228889, guid: 1e702155393f04244b59ce55aabba582, type: 3}
       propertyPath: m_Name
       value: Small Mandible Limb (1)

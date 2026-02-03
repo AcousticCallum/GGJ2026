@@ -734,6 +734,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Damage Trigger Limb (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2237828768300767327, guid: dd792ecb38c68694aa6fbcf6832cc4db, type: 3}
+      propertyPath: connectedArm
+      value: 
+      objectReference: {fileID: 8926138457429448656}
     - target: {fileID: 4548962054053729337, guid: dd792ecb38c68694aa6fbcf6832cc4db, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

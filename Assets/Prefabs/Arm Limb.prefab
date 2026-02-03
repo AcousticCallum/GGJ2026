@@ -476,11 +476,16 @@ MonoBehaviour:
   hand: {fileID: 3983220233315508910}
   targetOffset: {x: 0, y: 0}
   speed: 4
+  acceleration: 60
   length: 1.75
   minimumLength: 0.875
+  stoppingDistance: 0.125
+  knockbackRatio: 0.5
+  knockbackResistance: -1.5
   swingRate: 0.5
   swingAngle: 45
   swingStartOffset: 0
+  stunned: 0
   flipOnOppositeSide: 1
   opposingLimbs: []
   solver: {fileID: 6317692958434097202}

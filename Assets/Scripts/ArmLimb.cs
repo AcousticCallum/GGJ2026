@@ -10,14 +10,23 @@ public class ArmLimb : Limb
     public Vector2 targetOffset;
 
     public float speed;
+    public float acceleration;
     public float length;
     public float minimumLength;
+    public float stoppingDistance;
+    private Vector2 velocity = Vector2.zero;
+
+    public float knockbackRatio;
+    public float knockbackResistance;
 
     public float swingRate;
     public float swingAngle;
     public float swingStartOffset;
     private float swingTimer;
     private bool swinging;
+
+    public bool stunned;
+    private float stunTimer;
 
     public bool flipOnOppositeSide;
 
@@ -27,10 +36,39 @@ public class ArmLimb : Limb
 
     protected override void Update()
     {
+        stunTimer = Mathf.Max(0.0f, stunTimer - Time.deltaTime);
+        if (stunTimer == 0.0f) stunned = false;
+
         if (!body.IsMasked()) return;
 
+        if (stunned)
+        {
+            ResetHandTargetPosition();
+        }
+        {
+            UpdateHandTargetPosition();
+        }
+
+        UpdateHandPosition();
+
+        // Flip solver based on hand position
+        if (flipOnOppositeSide)
+        {
+            Vector2 localHandPosition = transform.InverseTransformPoint(hand.position);
+            if (localHandPosition.x != 0.0f) solver.flip = localHandPosition.x < 0.0f ? true : false;
+        }
+    }
+
+    protected override void OnAdd()
+    {
+        swinging = false;
+    }
+
+    public void UpdateHandTargetPosition()
+    {
         // Calculate target position
         Vector2 targetPosition = transform.position;
+        bool applyOffset = true;
         if (GetMaskTeam() == Mask.MaskTeam.Friendly)
         {
             if (PlayerMask.instance.IsUsingMouse())
@@ -45,16 +83,17 @@ public class ArmLimb : Limb
         }
         else if (GetMaskTeam() == Mask.MaskTeam.Hostile)
         {
-            // No player to target
-            if (!PlayerMask.instance) return;
-
-            targetPosition = PlayerMask.instance.body.rb.position;
+            // Is there player to target
+            if (PlayerMask.instance)
+            {
+                targetPosition = PlayerMask.instance.body.rb.position;
+            }
 
             swinging = true; // Always swing for hostile arms
         }
 
         // Apply offset
-        targetPosition += (Vector2)body.transform.TransformVector(targetOffset);
+        if (applyOffset) targetPosition += (Vector2)body.transform.TransformVector(targetOffset);
 
         // Apply swing
         if (swinging)
@@ -73,22 +112,47 @@ public class ArmLimb : Limb
         // Update hand target
         handTarget.position = targetPosition;
         handTarget.position = GetClampedPosition(handTarget.position);
-
-        // Move hand towards target
-        hand.position = Vector2.MoveTowards(hand.position, handTarget.position, speed * Time.deltaTime);
-        hand.position = GetClampedPosition(hand.position);
-
-        // Flip solver based on hand position
-        if (flipOnOppositeSide)
-        {
-            Vector2 localHandPosition = transform.InverseTransformPoint(hand.position);
-            if (localHandPosition.x != 0.0f) solver.flip = localHandPosition.x < 0.0f ? true : false;
-        }
     }
 
-    protected override void OnAdd()
+    public void UpdateHandPosition()
     {
-        swinging = false;
+        // Accelerate towards hand target
+        Vector2 toHandTarget = handTarget.position - hand.position;
+        if (toHandTarget.magnitude > stoppingDistance) toHandTarget.Normalize();
+        else toHandTarget = Vector2.zero;
+        velocity = Vector2.MoveTowards(velocity, toHandTarget * speed, acceleration * Time.deltaTime);
+        //velocity = Vector2.ClampMagnitude(velocity, speed);
+
+        // Move hand towards target
+        hand.position += Time.deltaTime * new Vector3(velocity.x, velocity.y, 0.0f);
+        hand.position = GetClampedPosition(hand.position);
+    }
+
+    public void ResetHandTargetPosition()
+    {
+        handTarget.position = hand.position;
+    }
+
+    public void GiveKnockback(Vector2 knockback)
+    {
+        knockback *= knockbackRatio;
+
+        if (knockbackResistance < 0.0f)
+        {
+            knockback *= (1.0f - knockbackResistance);
+        }
+        else
+        {
+            knockback = Vector2.Lerp(knockback, velocity, knockbackResistance);
+        }
+
+        velocity = knockback;
+    }
+
+    public void Stun(float duration)
+    {
+        stunned = true;
+        stunTimer = Mathf.Max(stunTimer, duration);
     }
 
     public override void PrimaryAction()

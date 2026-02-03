@@ -9,6 +9,8 @@ public class DamageTriggerLimb : Limb
     [HideInInspector] public Animator animator;
     private bool attacking;
 
+    public ArmLimb connectedArm;
+
     public bool armed = true;
 
     public int damage;
@@ -16,7 +18,12 @@ public class DamageTriggerLimb : Limb
     public float cooldown;
     private float cooldownTimer;
 
+    public float actionCooldown;
+    private float actionCooldownTimer;
+
     public float hitKnockback;
+    public bool knockbackWhenUnarmed;
+    public float knockbackStunDuration;
 
     private List<Health> hitBlacklist = new List<Health>();
 
@@ -31,8 +38,9 @@ public class DamageTriggerLimb : Limb
     {
         if(!body.IsMasked()) return;
 
-        // Update cooldown timer
+        // Update cooldown timers
         cooldownTimer = Mathf.Max(cooldownTimer - Time.deltaTime, 0.0f);
+        actionCooldownTimer = Mathf.Max(actionCooldownTimer - Time.deltaTime, 0.0f);
 
         // Clear blacklist when cooldown ends
         if (cooldownTimer == 0.0f)
@@ -40,15 +48,15 @@ public class DamageTriggerLimb : Limb
             hitBlacklist.Clear();
         }
 
-        // Try to attack
-        Attack();
+        // Try action
+        AttackAction();
     }
 
     private void OnTriggerStay2D(Collider2D collider2D)
     {
         if (!body.IsMasked()) return;
 
-        if (!armed) return;
+        if (!armed && !knockbackWhenUnarmed) return;
 
         // Get Rigidbody2D of other object
         Rigidbody2D otherRb = collider2D.attachedRigidbody;
@@ -70,13 +78,34 @@ public class DamageTriggerLimb : Limb
         hitBlacklist.Add(otherHealth);
 
         // Deal damage
-        otherHealth.TakeDamage(damage);
+        if (armed) otherHealth.TakeDamage(damage);
 
-        // Apply knockback
-        //Vector2 knockbackDirection = (rb.position - otherRb.position).normalized;
-        Vector2 knockbackDirection = (rb.position - collider2D.ClosestPoint(rb.position)).normalized;
-        body.velocity = knockbackDirection * hitKnockback;
- 
+        // Calculate knockback
+        Vector2 knockback = otherHealth.damageKnockbackMultiplier * hitKnockback * (rb.position - collider2D.ClosestPoint(rb.position)).normalized;
+
+        // Apply knockback to connected arm first
+        if (connectedArm)
+        {
+            // Apply knockback to connected arm
+            connectedArm.GiveKnockback(knockback);
+
+            // Stun connected arm
+            connectedArm.Stun(knockbackStunDuration);
+
+            // Reduce knockback based on connected arm's knockback ratio
+            knockback *= 1.0f - connectedArm.knockbackRatio;
+        }
+
+        // Apply knockback to body
+        if (body.knockbackResistance < 0)
+        {
+            body.velocity = (1.0f - body.knockbackResistance) * knockback;
+        }
+        else
+        {
+            body.velocity = Vector2.Lerp(knockback, body.velocity, body.knockbackResistance);
+        }
+
         // Start cooldown
         cooldownTimer = cooldown;
     }
@@ -103,7 +132,7 @@ public class DamageTriggerLimb : Limb
     }
 
     // Do an attack
-    private void Attack()
+    private void AttackAction()
     {
         if (!attacking) return;
 
@@ -111,11 +140,11 @@ public class DamageTriggerLimb : Limb
 
         if (!animator) return;
 
-        if (cooldownTimer > 0.0f) return;
+        if (actionCooldownTimer > 0.0f) return;
 
         animator.SetTrigger("Attack");
 
         // Start cooldown
-        cooldownTimer = cooldown;
+        actionCooldownTimer = actionCooldown;
     }
 }

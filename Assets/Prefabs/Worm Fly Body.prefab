@@ -524,6 +524,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2380461890420155042, guid: c7f40489e6badf0418e2aefe4056ca81, type: 3}
+      propertyPath: connectedArm
+      value: 
+      objectReference: {fileID: 8926138457429448656}
     - target: {fileID: 3734456209344228889, guid: c7f40489e6badf0418e2aefe4056ca81, type: 3}
       propertyPath: m_Name
       value: Needle Limb

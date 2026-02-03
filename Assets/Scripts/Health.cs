@@ -12,6 +12,8 @@ public class Health : MonoBehaviour
     public float damageCooldown;
     private float damageCooldownTimer;
 
+    public float damageKnockbackMultiplier = 1.0f;
+
     public bool dead;
 
     [Space]

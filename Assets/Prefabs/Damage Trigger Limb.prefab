@@ -136,10 +136,14 @@ MonoBehaviour:
   statBonuses: []
   destroyed: 0
   animator: {fileID: 0}
+  connectedArm: {fileID: 0}
   armed: 1
   damage: 1
-  cooldown: 0.5
+  cooldown: 0.1
+  actionCooldown: 0
   hitKnockback: 3
+  knockbackWhenUnarmed: 0
+  knockbackStunDuration: 0.09
 --- !u!1 &8126772526879886794 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8244672203204711445, guid: 4139b5936c9fd454689ac317357eb31d, type: 3}

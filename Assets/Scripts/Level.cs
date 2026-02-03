@@ -7,6 +7,7 @@ public class Level : MonoBehaviour
     public Tilemap groundMap;
 
     public float spawnRadius;
+    public float minimumSpawnRadius;
     public float spawnCooldown;
     private float spawnTimer;
 
@@ -55,28 +56,22 @@ public class Level : MonoBehaviour
         Body enemyPrefab = Prefabs.instance.enemyPrefabs[Random.Range(0, Prefabs.instance.enemyPrefabs.Length)];
 
         // Find random spawn position
-        Vector3 spawnPosition = Vector3.zero;
-        bool validPosition = false;
-        int attempts = 0;
-        while (!validPosition && attempts < 100)
+        for (int attempts = 0; attempts < 100; attempts++)
         {
-            Vector2 point = (Vector2)PlayerMask.instance.transform.position + spawnRadius * Random.insideUnitCircle;
-            Vector3Int cellPosition = new Vector3Int(Mathf.FloorToInt(point.x), Mathf.FloorToInt(point.y), 0);
+            // Get random point around player
+            Vector2 point = (Vector2)PlayerMask.instance.transform.position + Random.Range(minimumSpawnRadius, spawnRadius) * Random.insideUnitCircle.normalized;
+            Vector3Int cellPosition = groundMap.WorldToCell(point);
 
-            if (groundMap.HasTile(cellPosition))
-            {
-                spawnPosition = groundMap.GetCellCenterWorld(cellPosition);
-                validPosition = true;
-            }
+            // Check if cell is valid
+            if (!groundMap.HasTile(cellPosition)) continue;
 
-            attempts++;
+            // Instantiate enemy at spawn position
+            Vector2 spawnPosition = groundMap.GetCellCenterWorld(cellPosition);
+            Instantiate(enemyPrefab, spawnPosition, Quaternion.identity, transform);
+
+            return true;
         }
 
-        if (!validPosition) return false;
-
-        // Instantiate enemy at spawn position
-        Instantiate(enemyPrefab, spawnPosition, Quaternion.identity, transform);
-
-        return true;
+        return false;
     }
 }

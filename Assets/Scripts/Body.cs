@@ -25,6 +25,8 @@ public class Body : MonoBehaviour
     private Vector2 targetVelocity;
     private float targetRotation;
 
+    public float knockbackResistance;
+
     [HideInInspector] public Vector2 velocity;
     [HideInInspector] public float rotation;
 
