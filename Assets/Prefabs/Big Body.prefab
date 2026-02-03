@@ -217,8 +217,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
+  m_Offset: {x: 0, y: 0.5}
+  m_Size: {x: 0.5, y: 1}
   m_Direction: 0
 --- !u!1 &2426971072006720640
 GameObject:
@@ -777,6 +777,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Big Body
       objectReference: {fileID: 0}
+    - target: {fileID: 3428239977244399489, guid: 3327a94bcf76b8744bb326e461a62296, type: 3}
+      propertyPath: m_Size.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3428239977244399489, guid: 3327a94bcf76b8744bb326e461a62296, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3776004983442102523, guid: 3327a94bcf76b8744bb326e461a62296, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -977,53 +985,8 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4358435199325602066, guid: 3327a94bcf76b8744bb326e461a62296, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1116029673890553028}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4191603019996189435, guid: 3327a94bcf76b8744bb326e461a62296, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1016751979705519413}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3327a94bcf76b8744bb326e461a62296, type: 3}
---- !u!1 &7119661534095910451 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4191603019996189435, guid: 3327a94bcf76b8744bb326e461a62296, type: 3}
-  m_PrefabInstance: {fileID: 6405683054020359368}
-  m_PrefabAsset: {fileID: 0}
---- !u!70 &1016751979705519413
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7119661534095910451}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
-  m_Direction: 0
 --- !u!4 &7249048775560525274 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4358435199325602066, guid: 3327a94bcf76b8744bb326e461a62296, type: 3}
