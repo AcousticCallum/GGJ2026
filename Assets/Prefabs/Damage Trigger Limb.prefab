@@ -145,7 +145,8 @@ MonoBehaviour:
   damage: 1
   cooldown: 0.1
   actionCooldown: 0
-  hitKnockback: 3
+  knockback: 2
+  recoilKnockback: 2
   knockbackWhenUnarmed: 0
   knockbackStunDuration: 0.09
 --- !u!1 &8126772526879886794 stripped

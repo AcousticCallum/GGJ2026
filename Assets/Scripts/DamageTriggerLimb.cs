@@ -21,7 +21,8 @@ public class DamageTriggerLimb : Limb
     public float actionCooldown;
     private float actionCooldownTimer;
 
-    public float hitKnockback;
+    public float knockback;
+    public float recoilKnockback;
     public bool knockbackWhenUnarmed;
     public float knockbackStunDuration;
 
@@ -81,29 +82,29 @@ public class DamageTriggerLimb : Limb
         if (armed) otherHealth.TakeDamage(damage);
 
         // Calculate knockback
-        Vector2 knockback = otherHealth.damageKnockbackMultiplier * hitKnockback * (rb.position - collider2D.ClosestPoint(rb.position)).normalized;
+        Vector2 newKnockback = otherHealth.damageKnockbackMultiplier * recoilKnockback * (rb.position - collider2D.ClosestPoint(rb.position)).normalized;
 
         // Apply knockback to connected arm first
         if (connectedArm)
         {
             // Apply knockback to connected arm
-            connectedArm.GiveKnockback(knockback);
+            connectedArm.GiveKnockback(newKnockback);
 
             // Stun connected arm
             connectedArm.Stun(knockbackStunDuration);
 
             // Reduce knockback based on connected arm's knockback ratio
-            knockback *= 1.0f - connectedArm.knockbackRatio;
+            newKnockback *= 1.0f - connectedArm.knockbackRatio;
         }
 
         // Apply knockback to body
         if (body.knockbackResistance < 0)
         {
-            body.velocity = (1.0f - body.knockbackResistance) * knockback;
+            body.velocity = (1.0f - body.knockbackResistance) * newKnockback;
         }
         else
         {
-            body.velocity = Vector2.Lerp(knockback, body.velocity, body.knockbackResistance);
+            body.velocity = Vector2.Lerp(newKnockback, body.velocity, body.knockbackResistance);
         }
 
         // Start cooldown

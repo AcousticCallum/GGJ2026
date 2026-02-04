@@ -218,8 +218,16 @@ PrefabInstance:
       value: -0.0052646995
       objectReference: {fileID: 0}
     - target: {fileID: 2237828768300767327, guid: dd792ecb38c68694aa6fbcf6832cc4db, type: 3}
+      propertyPath: knockback
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2237828768300767327, guid: dd792ecb38c68694aa6fbcf6832cc4db, type: 3}
       propertyPath: hitKnockback
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2237828768300767327, guid: dd792ecb38c68694aa6fbcf6832cc4db, type: 3}
+      propertyPath: recoilKnockback
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4462669080762924294, guid: dd792ecb38c68694aa6fbcf6832cc4db, type: 3}
       propertyPath: m_LocalPosition.y

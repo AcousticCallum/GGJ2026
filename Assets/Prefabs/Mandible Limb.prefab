@@ -234,6 +234,10 @@ PrefabInstance:
       value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 2237828768300767327, guid: dd792ecb38c68694aa6fbcf6832cc4db, type: 3}
+      propertyPath: recoilKnockback
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2237828768300767327, guid: dd792ecb38c68694aa6fbcf6832cc4db, type: 3}
       propertyPath: knockbackWhenUnarmed
       value: 0
       objectReference: {fileID: 0}
