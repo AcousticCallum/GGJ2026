@@ -97,6 +97,7 @@ MonoBehaviour:
   statBonuses: []
   prefabIndex: 1
   canAim: 1
+  bodyTimerActive: 0
   bodyTimer: 12
   bodyTimerSlowdownMultiplier: 0.1
   bodyTimerSlowdownDuration: 1
@@ -194,19 +195,7 @@ MonoBehaviour:
     m_ActionId: 27c5f898-bc57-4ee1-8800-db469aca5fe3
     m_ActionName: 'Player/Crouch[/XInputControllerWindows/buttonEast,/Keyboard/c]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8368609710332068793}
-        m_TargetAssemblyTypeName: PlayerMask, Assembly-CSharp
-        m_MethodName: OnSecondaryAction
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: f1ba0d36-48eb-4cd5-b651-1c94a6531f70
     m_ActionName: 'Player/Jump[/Keyboard/space,/XInputControllerWindows/buttonSouth]'
   - m_PersistentCalls:
@@ -277,6 +266,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 0e3cb4d2-b25d-49c5-a930-02ec3b49750f
     m_ActionName: 'Player/Mouse Position[/Mouse/position]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8368609710332068793}
+        m_TargetAssemblyTypeName: PlayerMask, Assembly-CSharp
+        m_MethodName: OnSecondaryAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 79f50f6d-5dfb-4e77-a68b-b9ae2b8f4a56
+    m_ActionName: 'Player/Secondary[/XInputControllerWindows/leftTrigger,/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

@@ -15,11 +15,15 @@ public class Health : MonoBehaviour
     public float damageKnockbackMultiplier = 1.0f;
 
     public bool dead;
+    public bool invulnerable;
 
     [Space]
 
     public string damageSound;
     public string deathSound;
+
+    private static float damageSlowDownTimer;
+    private static bool damageSlowDownUpdated;
 
     private void Start()
     {
@@ -29,6 +33,22 @@ public class Health : MonoBehaviour
     private void Update()
     {
         damageCooldownTimer = Mathf.Max(damageCooldownTimer - Time.deltaTime, 0.0f);
+
+        if (!damageSlowDownUpdated)
+        {
+            damageSlowDownTimer = Mathf.Max(damageSlowDownTimer - Time.unscaledDeltaTime, 0.0f);
+            if (damageSlowDownTimer == 0.0f)
+            {
+                Time.timeScale = 1.0f;
+            }
+
+            damageSlowDownUpdated = true;
+        }
+    }
+
+    private void LateUpdate()
+    {
+        damageSlowDownUpdated = false;
     }
 
     public void TakeDamage(int damage)
@@ -38,9 +58,14 @@ public class Health : MonoBehaviour
         // Play damage sound
         SoundManager.instance.PlaySound(damageSound);
 
-        if (dead) return;
+        if (invulnerable) return;
 
+        if (dead) return;
+        
         health -= damage;
+
+        damageSlowDownTimer = 0.25f;
+        Time.timeScale = 0.5f;
 
         if (health <= 0)
         {
@@ -50,6 +75,8 @@ public class Health : MonoBehaviour
 
     public void Die()
     {
+        if (invulnerable) return;
+
         if (dead) return;
         dead = true;
 

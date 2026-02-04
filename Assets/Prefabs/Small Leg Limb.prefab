@@ -100,6 +100,18 @@ PrefabInstance:
       propertyPath: stepSizeMin
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1953110724345324677, guid: 910241729c0457c42bd8aaa023677558, type: 3}
+      propertyPath: statBonuses.Array.data[0].value
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1953110724345324677, guid: 910241729c0457c42bd8aaa023677558, type: 3}
+      propertyPath: statBonuses.Array.data[1].value
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1953110724345324677, guid: 910241729c0457c42bd8aaa023677558, type: 3}
+      propertyPath: statBonuses.Array.data[2].value
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 2930815357872367948, guid: 910241729c0457c42bd8aaa023677558, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
       value: 0

@@ -113,12 +113,12 @@ MonoBehaviour:
   controller: 0
   statBonuses:
   - statBonusType: 0
-    value: 0.4
+    value: -0.4
   - statBonusType: 1
-    value: 0.4
+    value: -0.4
   - statBonusType: 2
-    value: -0.8
+    value: -0.9
   moveCooldown: 0.8
-  moveDuration: 1.6
+  moveDuration: 1.2
   canStopPrimaryAction: 1
-  canStopSecondaryAction: 0
+  canStopSecondaryAction: 1

@@ -8,6 +8,7 @@ public class ArmLimb : Limb
     public Transform hand;
 
     public Vector2 targetOffset;
+    public float targetAngleOffset;
 
     public float speed;
     public float acceleration;
@@ -22,6 +23,7 @@ public class ArmLimb : Limb
     public float swingRate;
     public float swingAngle;
     public float swingStartOffset;
+    public float swingAngleOffset;
     private float swingTimer;
     private bool swinging;
 
@@ -88,25 +90,29 @@ public class ArmLimb : Limb
             {
                 targetPosition = PlayerMask.instance.body.rb.position;
             }
-
-            swinging = true; // Always swing for hostile arms
         }
 
         // Apply offset
         if (applyOffset) targetPosition += (Vector2)body.transform.TransformVector(targetOffset);
 
+        float angleOffsetTotal = targetAngleOffset;
         // Apply swing
         if (swinging)
         {
             swingTimer += swingRate * Time.deltaTime;
             if (swingTimer > 1.0f) swingTimer -= 1.0f;
 
-            Vector2 toTarget = (targetPosition - (Vector2)transform.position);
-            targetPosition = (Vector2)transform.position + toTarget.magnitude * RotateVector2(toTarget.normalized, Mathf.Deg2Rad * GetSwingAngle());
+            angleOffsetTotal += GetSwingAngle();
         }
         else
         {
             swingTimer = 0.0f;
+        }
+
+        if (angleOffsetTotal != 0.0f)
+        {
+            Vector2 toTarget = (targetPosition - (Vector2)transform.position);
+            targetPosition = (Vector2)transform.position + toTarget.magnitude * RotateVector2(toTarget.normalized, Mathf.Deg2Rad * angleOffsetTotal);
         }
 
         // Update hand target
@@ -182,7 +188,7 @@ public class ArmLimb : Limb
 
     public float GetSwingAngle()
     {
-        return Mathf.Cos((swingStartOffset + swingTimer) * 2.0f * Mathf.PI) * swingAngle;
+        return swingAngleOffset + Mathf.Cos((swingStartOffset + swingTimer) * 2.0f * Mathf.PI) * swingAngle;
     }
 
     public static Vector2 RotateVector2(Vector2 v, float delta)
