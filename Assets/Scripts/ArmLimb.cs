@@ -112,7 +112,7 @@ public class ArmLimb : Limb
         if (angleOffsetTotal != 0.0f)
         {
             Vector2 toTarget = (targetPosition - (Vector2)transform.position);
-            targetPosition = (Vector2)transform.position + toTarget.magnitude * RotateVector2(toTarget.normalized, Mathf.Deg2Rad * angleOffsetTotal);
+            targetPosition = (Vector2)transform.position + toTarget.magnitude * Generic.RotateVector2(toTarget.normalized, Mathf.Deg2Rad * angleOffsetTotal);
         }
 
         // Update hand target
@@ -189,13 +189,5 @@ public class ArmLimb : Limb
     public float GetSwingAngle()
     {
         return swingAngleOffset + Mathf.Cos((swingStartOffset + swingTimer) * 2.0f * Mathf.PI) * swingAngle;
-    }
-
-    public static Vector2 RotateVector2(Vector2 v, float delta)
-    {
-        return new Vector2(
-            v.x * Mathf.Cos(delta) - v.y * Mathf.Sin(delta),
-            v.x * Mathf.Sin(delta) + v.y * Mathf.Cos(delta)
-        );
     }
 }

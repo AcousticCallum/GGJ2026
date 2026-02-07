@@ -22,6 +22,10 @@ public class Health : MonoBehaviour
     public string damageSound;
     public string deathSound;
 
+    [Space]
+
+    public ParticleSystem hitEffect;
+
     private static float damageSlowDownTimer;
     private static bool damageSlowDownUpdated;
 
@@ -106,5 +110,13 @@ public class Health : MonoBehaviour
         if (TryGetComponent(out Body body)) return body.GetMaskTeam();
 
         return Mask.MaskTeam.Neutral;
+    }
+
+    public void SpawnHitEffect(Vector2 position)
+    {
+        if (hitEffect)
+        {
+            Instantiate(hitEffect, position, Quaternion.identity);
+        }
     }
 }

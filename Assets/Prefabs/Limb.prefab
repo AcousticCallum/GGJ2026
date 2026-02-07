@@ -109,9 +109,12 @@ MonoBehaviour:
   maxHealth: 0
   health: 3
   damageCooldown: 0.1
+  damageKnockbackMultiplier: 1
   dead: 0
+  invulnerable: 0
   damageSound: Hit
   deathSound: 
+  hitEffect: {fileID: 7004744153902642238, guid: e401de0c87aee764997fb6a8ef6655fd, type: 3}
 --- !u!1 &8244672203204711445
 GameObject:
   m_ObjectHideFlags: 0

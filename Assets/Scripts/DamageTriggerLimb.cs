@@ -81,8 +81,12 @@ public class DamageTriggerLimb : Limb
         // Deal damage
         if (armed) otherHealth.TakeDamage(damage);
 
+        // Spawn hit effect
+        Vector2 hitPoint = collider2D.ClosestPoint(rb.position);
+        otherHealth.SpawnHitEffect(hitPoint);
+
         // Calculate knockback
-        Vector2 newKnockback = otherHealth.damageKnockbackMultiplier * recoilKnockback * (rb.position - collider2D.ClosestPoint(rb.position)).normalized;
+        Vector2 newKnockback = otherHealth.damageKnockbackMultiplier * recoilKnockback * (rb.position - hitPoint).normalized;
 
         // Apply knockback to connected arm first
         if (connectedArm)

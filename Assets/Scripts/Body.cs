@@ -8,6 +8,11 @@ public class Body : MonoBehaviour
 
     [HideInInspector] public Rigidbody2D rb;
 
+    public bool setCentreOfMass;
+    public Vector2 centreOfMass;
+
+    [Space]
+
     public Transform[] maskSlots;
     public List<Mask> masks;
     public Mask addMaskPrefabOnStart;
@@ -55,6 +60,8 @@ public class Body : MonoBehaviour
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        if (setCentreOfMass) rb.centerOfMass = centreOfMass;
 
         foreach (Limb limb in limbs)
         {
