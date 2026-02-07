@@ -58,6 +58,8 @@ public class Body : MonoBehaviour
     private float moveAccelerationMultiplier = 1.0f;
     private float rotateSpeedMultiplier = 1.0f;
 
+    private bool setupRotation;
+
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -130,6 +132,11 @@ public class Body : MonoBehaviour
             }
         }
 
+        // Clamp stat multipliers to a minimum of 0
+        moveSpeedMultiplier = Mathf.Max(moveSpeedMultiplier, 0.0f);
+        moveAccelerationMultiplier = Mathf.Max(moveAccelerationMultiplier, 0.0f);
+        rotateSpeedMultiplier = Mathf.Max(rotateSpeedMultiplier, 0.0f);
+
         // Smoothly move towards target velocity and rotation
         velocity = Vector2.MoveTowards(velocity, moveSpeedMultiplier * targetVelocity, moveAccelerationMultiplier * moveAcceleration * Time.deltaTime);
         rotation = Mathf.LerpAngle(rotation, targetRotation, rotateSpeedMultiplier * rotateSpeed * Time.deltaTime);
@@ -148,6 +155,14 @@ public class Body : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
+        // Set up rotation on the first FixedUpdate to avoid issues with Rigidbody2D interpolation
+        if (!setupRotation)
+        {
+            rotation = rb.rotation;
+            targetRotation = rotation;
+            setupRotation = true;
+        }
+
         // Apply movement and rotation to Rigidbody2D
         rb.MovePosition(rb.position + Time.fixedDeltaTime * velocity);
         rb.MoveRotation(rotation);

@@ -38,6 +38,8 @@ public class Level : MonoBehaviour
 
     private void Update()
     {
+        if (spawnCooldown <= 0.0f) return;
+
         spawnTimer -= Time.deltaTime;
         if (spawnTimer <= 0.0f)
         {

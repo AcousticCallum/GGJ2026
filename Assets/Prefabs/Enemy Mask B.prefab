@@ -111,6 +111,7 @@ MonoBehaviour:
   maskTeam: 2
   body: {fileID: 0}
   controller: 0
+  canAim: 0
   statBonuses:
   - statBonusType: 0
     value: -0.6
@@ -122,3 +123,9 @@ MonoBehaviour:
   moveDuration: 0.5
   canStopPrimaryAction: 0
   canStopSecondaryAction: 0
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 8
+  detectionArcRadius: 16
+  detectionArcAngle: 240
+  detectionDuration: 5

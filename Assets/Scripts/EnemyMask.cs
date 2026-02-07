@@ -11,6 +11,12 @@ public class EnemyMask : Mask
     private float moveTimer;
     private bool moving;
 
+    public LayerMask obstacleMask;
+    public float detectionArcRadius;
+    public float detectionArcAngle;
+    public float detectionDuration;
+    private float detectionTimer;
+
     protected override void Update()
     {
         // Do nothing if not the controller
@@ -18,8 +24,25 @@ public class EnemyMask : Mask
 
         if(!PlayerMask.instance) return;
 
-        // Get direction from to player
+        // Get target position (player position)
         Vector2 targetPosition = PlayerMask.instance.body.rb.position;
+
+        // Detection and detection timer
+        if (ValidDetection(targetPosition))
+        {
+            detectionTimer = detectionDuration;
+        }
+        else
+        {
+            detectionTimer = Mathf.Max(0.0f, detectionTimer - Time.deltaTime);
+        }
+
+        // Do no movement or actions if not detected
+        if (detectionTimer == 0.0f)
+        {
+            NoDetectionUpdate();
+            return;
+        }
 
         // Apply spacing from other bodies on the same team
         Body.allBodies.RemoveAll(item => item == null);
@@ -72,12 +95,37 @@ public class EnemyMask : Mask
         {
             // Move forward and rotate the body towards the player
             body.Move(body.transform.up);
-            body.Rotate(Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90.0f);
+            if (direction != Vector2.zero) body.Rotate(Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90.0f);
         }
         else
         {
             // Stop movement
             body.Move(Vector2.zero);
         }
+    }
+
+    public void NoDetectionUpdate()
+    {
+        // Do nothing if not the controller
+        if (!controller) return;
+
+        // Stop movement
+        body.Move(Vector2.zero);
+    }
+
+    private bool ValidDetection(Vector2 targetPosition)
+    {
+        // Target is out of detection range
+        if (Vector2.Distance(body.rb.position, targetPosition) > detectionArcRadius) return false;
+
+        // Target is out of detection arc
+        if (Vector2.Angle(body.transform.up, (targetPosition - (Vector2)body.transform.position).normalized) > detectionArcAngle / 2.0f) return false;
+
+        // Target is behind an obstacle
+        Vector2 toTarget = targetPosition - (Vector2)body.transform.position;
+        if (Physics2D.Raycast(body.transform.position, toTarget.normalized, toTarget.magnitude, obstacleMask)) return false;
+
+        // Target is valid
+        return true;
     }
 }
