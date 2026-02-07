@@ -11,6 +11,8 @@ public class Mask : MonoBehaviour
 
     public bool controller;
 
+    public bool canAim;
+
     public StatBonus[] statBonuses;
 
     protected virtual void Start()

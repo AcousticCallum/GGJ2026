@@ -133,5 +133,9 @@ MonoBehaviour:
   destroyed: 0
   shootOffset: {x: 0, y: 0.75}
   projectile: {fileID: 7613192708913510627, guid: c167abbd5b16a8246a1a8560aebc192d, type: 3}
+  connectedArm: {fileID: 0}
   cooldown: 0.5
+  knockback: 0
+  recoilKnockback: 2.5
+  knockbackStunDuration: 0.09
   shootSound: Shoot

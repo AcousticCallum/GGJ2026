@@ -5,9 +5,18 @@ public class DistanceConstraint : MonoBehaviour
 {
     public Transform target;
     public Vector2 offset;
+
+    [Space]
+    
     public float distance;
     public bool forceDistance;
+
+    [Space]
+
+    public float angleOffset;
     public float maxAngle;
+
+    [Space]
 
     public bool selfUpdate;
 
@@ -39,10 +48,12 @@ public class DistanceConstraint : MonoBehaviour
 
         Vector2 targetPosition = GetTargetPosition();
 
-        if (distance < 0) distance = Vector2.Distance(worldPosition, targetPosition);
-
         Vector2 delta = worldPosition - targetPosition;
-        if (delta.magnitude > distance || forceDistance)
+
+        float currentDistance = delta.magnitude;
+        if (currentDistance == distance) return;
+
+        if (currentDistance > distance || forceDistance)
         {
             worldPosition = targetPosition + distance * delta.normalized;
         }
@@ -58,7 +69,7 @@ public class DistanceConstraint : MonoBehaviour
         }
 
         transform.position = worldPosition;
-        transform.rotation = initialRotation * Quaternion.FromToRotation(Vector3.up, -delta.normalized);
+        transform.rotation = initialRotation * Quaternion.FromToRotation(Vector3.up, -delta.normalized) * Quaternion.Euler(angleOffset * Vector3.forward);
 
         if (childConstraint) childConstraint.Apply();
     }

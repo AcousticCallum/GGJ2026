@@ -41,10 +41,7 @@ public class Health : MonoBehaviour
         if (!damageSlowDownUpdated)
         {
             damageSlowDownTimer = Mathf.Max(damageSlowDownTimer - Time.unscaledDeltaTime, 0.0f);
-            if (damageSlowDownTimer == 0.0f)
-            {
-                Time.timeScale = 1.0f;
-            }
+            if (damageSlowDownTimer == 0.0f) Time.timeScale = 1.0f;
 
             damageSlowDownUpdated = true;
         }
@@ -68,8 +65,11 @@ public class Health : MonoBehaviour
         
         health -= damage;
 
-        damageSlowDownTimer = 0.25f;
-        Time.timeScale = 0.5f;
+        if(GetMaskTeam() == Mask.MaskTeam.Friendly)
+        {
+            damageSlowDownTimer = 0.25f;
+            Time.timeScale = 0.5f;
+        }
 
         if (health <= 0)
         {

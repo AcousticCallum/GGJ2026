@@ -16,8 +16,6 @@ public class PlayerMask : Mask
 
     public int prefabIndex;
 
-    public bool canAim;
-
     private Vector2 moveInput;
     private Vector2 lookInput;
     private Vector2 mousePositionInput;

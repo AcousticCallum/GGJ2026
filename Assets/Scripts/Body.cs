@@ -16,6 +16,7 @@ public class Body : MonoBehaviour
     public Transform[] maskSlots;
     public List<Mask> masks;
     public Mask addMaskPrefabOnStart;
+    public bool maskCanAim = true;
 
     [Space]
 
@@ -229,6 +230,8 @@ public class Body : MonoBehaviour
 
             // If this is the first mask, set it as the controller
             if (masks.Count == 0) mask.controller = true;
+
+            mask.canAim = maskCanAim;
 
             // Add mask to list
             masks.Add(mask);

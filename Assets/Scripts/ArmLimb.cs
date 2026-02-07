@@ -142,17 +142,13 @@ public class ArmLimb : Limb
     public void GiveKnockback(Vector2 knockback)
     {
         knockback *= knockbackRatio;
+        knockback *= 1.0f - body.knockbackResistance;
 
-        if (knockbackResistance < 0.0f)
+        float dot = Vector2.Dot(velocity, knockback.normalized);
+        if (dot <= 1.0f)
         {
-            knockback *= (1.0f - knockbackResistance);
+            velocity = velocity - (dot * knockback.normalized) + knockback;
         }
-        else
-        {
-            knockback = Vector2.Lerp(knockback, velocity, knockbackResistance);
-        }
-
-        velocity = knockback;
     }
 
     public void Stun(float duration)

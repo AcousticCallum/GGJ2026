@@ -6,10 +6,16 @@ public class GunLimb : Limb
 
     public Projectile projectile;
 
+    public ArmLimb connectedArm;
+
     public float cooldown;
     private float cooldownTimer;
 
     private bool shooting = false;
+
+    public float knockback;
+    public float recoilKnockback;
+    public float knockbackStunDuration;
 
     [Space]
 
@@ -43,6 +49,34 @@ public class GunLimb : Limb
         // Instantiate projectile
         Projectile newProjectile = Instantiate(projectile, transform.position + transform.TransformVector(shootOffset), transform.rotation);
         newProjectile.maskTeam = GetMaskTeam();
+
+        // Calculate knockback
+        Vector2 newKnockback = recoilKnockback * -transform.up;
+
+        // Apply knockback to connected arm first
+        if (connectedArm)
+        {
+            // Apply knockback to connected arm
+            connectedArm.GiveKnockback(newKnockback);
+
+            // Stun connected arm
+            connectedArm.Stun(knockbackStunDuration);
+
+            // Reduce knockback based on connected arm's knockback ratio
+            newKnockback *= 1.0f - connectedArm.knockbackRatio;
+        }
+
+        newKnockback *= 1.0f - body.knockbackResistance;
+
+        if (newKnockback != Vector2.zero)
+        {
+            // Apply knockback to body
+            float dot = Vector2.Dot(body.velocity, newKnockback.normalized);
+            if (dot <= 1.0f)
+            {
+                body.velocity = body.velocity - (dot * newKnockback.normalized) + newKnockback;
+            }
+        }
 
         // Play shoot sound
         SoundManager.instance.PlaySound(shootSound);

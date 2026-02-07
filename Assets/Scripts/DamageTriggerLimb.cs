@@ -101,14 +101,16 @@ public class DamageTriggerLimb : Limb
             newKnockback *= 1.0f - connectedArm.knockbackRatio;
         }
 
-        // Apply knockback to body
-        if (body.knockbackResistance < 0)
+        newKnockback *= 1.0f - body.knockbackResistance;
+
+        if (newKnockback != Vector2.zero)
         {
-            body.velocity = (1.0f - body.knockbackResistance) * newKnockback;
-        }
-        else
-        {
-            body.velocity = Vector2.Lerp(newKnockback, body.velocity, body.knockbackResistance);
+            // Apply knockback to body
+            float dot = Vector2.Dot(body.velocity, newKnockback.normalized);
+            if (dot <= 1.0f)
+            {
+                body.velocity = body.velocity - (dot * newKnockback.normalized) + newKnockback;
+            }
         }
 
         // Start cooldown
