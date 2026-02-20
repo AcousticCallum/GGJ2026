@@ -38,7 +38,7 @@ public class EnemyMask : Mask
         }
 
         // Do no movement or actions if not detected
-        if (detectionTimer == 0.0f)
+        if (!PlayerDetected())
         {
             NoDetectionUpdate();
             return;
@@ -127,5 +127,10 @@ public class EnemyMask : Mask
 
         // Target is valid
         return true;
+    }
+
+    public bool PlayerDetected()
+    {
+        return PlayerMask.instance && detectionTimer > 0.0f;
     }
 }

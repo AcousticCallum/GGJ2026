@@ -86,7 +86,8 @@ public class ArmLimb : Limb
         else if (GetMaskTeam() == Mask.MaskTeam.Hostile)
         {
             // Is there player to target
-            if (PlayerMask.instance)
+            EnemyMask enemyMask = body.masks[0] as EnemyMask;
+            if (enemyMask.PlayerDetected())
             {
                 targetPosition = PlayerMask.instance.body.rb.position;
             }

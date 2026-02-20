@@ -270,6 +270,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gun Limb
       objectReference: {fileID: 0}
+    - target: {fileID: 5973619066749861391, guid: 7e8721fe7de7b2146a4d3680b929e3a8, type: 3}
+      propertyPath: cooldown
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 8934083533433821829, guid: 7e8721fe7de7b2146a4d3680b929e3a8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.000000059604645
