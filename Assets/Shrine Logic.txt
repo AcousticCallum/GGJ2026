@@ -1,0 +1,16 @@
+Shrine Logic
+
+Shrines have ID values.
+A static current shrine ID variable exists (this will be added to a savedata system at some point).
+
+The scene does not have a player by default. The player is spawned in by the current shrine, if the player needs spawning at all.
+The player is always added to DontDestroyOnLoad on awake, but is removed upon dying to allow a new player to load in.
+
+When resting at a shrine, the shrine is added to DontDestroyOnLoad and the current shrine ID is set to its ID. Then, the scene is reloaded additively.
+All newly loaded shrines check the current shrine ID on awake. If it is their ID, they destroy themselves. Otherwise, they load in as normal.
+The current shrine detects a player already exists and does not spawn a new player.
+The current shrine is then removed from DontDestroyOnLoad, leaving only the player.
+
+When the player dies, no shrines are added to DontDestroyOnLoad but current shrine ID is unchanged. Then, the scene is reloaded (maybe additively? might not be necessary).
+All shrines load in as normal, even if they are the current shrine.
+The current shrine detects a player does not exist, so it spawns a new player.

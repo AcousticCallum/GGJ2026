@@ -1,4 +1,3 @@
-using TMPro.EditorUtilities;
 using UnityEngine;
 
 using UnityEngine.InputSystem;
@@ -27,6 +26,14 @@ public class PlayerMask : Mask
     public float bodyTimer;
     public float bodyTimerSlowdownMultiplier;
     public float bodyTimerSlowdownDuration;
+
+    [Space]
+     
+    public float maxSwitchDistance;
+
+    [Space]
+
+    public float maxInteractDistance;
 
     protected override void Start()
     {
@@ -182,6 +189,15 @@ public class PlayerMask : Mask
         }
     }
 
+    public void OnInteract(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+            Interact();
+            return;
+        }
+    }
+
     private void StartSwitch()
     {
         switching = true;
@@ -189,7 +205,7 @@ public class PlayerMask : Mask
 
     private void FinishSwitch()
     {
-        float bestDistance = float.MaxValue;
+        float bestDistance = maxSwitchDistance; // Technically should be slightly over max but this is fine and simpler.
         Body bestBody = null;
         Body.allBodies.RemoveAll(item => item == null);
         foreach (Body checkBody in Body.allBodies)
@@ -218,7 +234,7 @@ public class PlayerMask : Mask
             }
         }
 
-        if (bestBody != null)
+        if (bestBody)
         {
             // Switch to bestBody
             body.switchable = false;
@@ -235,6 +251,43 @@ public class PlayerMask : Mask
         }
 
         switching = false;
+    }
+
+    private void Interact()
+    {
+        float bestDistance = maxInteractDistance; // Technically should be slightly over max but this is fine and simpler.
+        Interactable bestInteractable = null;
+        Interactable.allInteractables.RemoveAll(item => item == null);
+        foreach (Interactable checkInteractable in Interactable.allInteractables)
+        {
+            if (!checkInteractable) continue;
+
+            if (usingMouse)
+            {
+                Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(mousePositionInput);
+                float distance = Vector2.Distance((Vector2)checkInteractable.transform.position, mouseWorldPos);
+
+                if (distance >= bestDistance) continue;
+
+                bestDistance = distance;
+                bestInteractable = checkInteractable;
+            }
+            else
+            {
+                Vector2 toCheckBody = ((Vector2)checkInteractable.transform.position - body.rb.position).normalized;
+                float distance = Vector2.Angle(lookInput, toCheckBody);
+
+                if (distance >= bestDistance) continue;
+
+                bestDistance = distance;
+                bestInteractable = checkInteractable;
+            }
+        }
+
+        if (bestInteractable)
+        {
+            bestInteractable.Interact();
+        }
     }
 
     public override void OnRemove()
