@@ -125,6 +125,7 @@ MonoBehaviour:
   controller: 0
   canAim: 0
   statBonuses: []
+  souls: 80
   moveCooldown: 1.5
   moveDuration: 0.4
   canStopPrimaryAction: 0

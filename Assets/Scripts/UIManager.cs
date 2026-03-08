@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private TextMeshProUGUI soulsText;
 
     private void Awake()
     {
@@ -41,6 +42,8 @@ public class UIManager : MonoBehaviour
             }
 
             scoreText.text = "Kills: " + PlayerMask.kills;
+
+            soulsText.text = "Souls: " + PlayerMask.playerSouls;
         }
     }
 }

@@ -2,16 +2,34 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public float locks;
+    public int locks;
+
+    public string gameStateID;
+
+    private void Start()
+    {
+        if (gameStateID != "")
+        {
+            locks = GameState.GetState(gameStateID) - 1;
+
+            if (locks == 0) gameObject.SetActive(false);
+        }
+    }
 
     public void Open()
     {
-        if(locks > 1)
+        if (locks <= 0) return;
+
+        locks--;
+
+        if (gameStateID != "")
         {
-            locks--;
-            return;
+            GameState.SetState(gameStateID, locks + 1);
         }
 
-        gameObject.SetActive(false);
+        if (locks == 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

@@ -119,6 +119,7 @@ MonoBehaviour:
     value: -10
   - statBonusType: 2
     value: -10
+  souls: 80
   moveCooldown: 0
   moveDuration: 1
   canStopPrimaryAction: 0

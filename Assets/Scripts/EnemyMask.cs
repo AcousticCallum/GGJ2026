@@ -113,6 +113,14 @@ public class EnemyMask : Mask
         body.Move(Vector2.zero);
     }
 
+    public override void Remove()
+    {
+        // Give player souls for removing an enemy mask.
+        if (PlayerMask.instance) PlayerMask.instance.AddSouls(souls);
+
+        base.Remove();
+    }
+
     private bool ValidDetection(Vector2 targetPosition)
     {
         // Target is out of detection range

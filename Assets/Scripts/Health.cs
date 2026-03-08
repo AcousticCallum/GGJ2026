@@ -26,12 +26,27 @@ public class Health : MonoBehaviour
 
     public ParticleSystem hitEffect;
 
+    [Space]
+
+    public string gameStateID;
+
     private static float damageSlowDownTimer;
     private static bool damageSlowDownUpdated;
 
     private void Start()
     {
         maxHealth = health;
+
+        if (gameStateID != "")
+        {
+            dead = GameState.GetState(gameStateID) == 1;
+
+            if (dead)
+            {
+                health = 0;
+                onDeath.Invoke();
+            }
+        }
     }
 
     private void Update()
@@ -83,6 +98,11 @@ public class Health : MonoBehaviour
 
         if (dead) return;
         dead = true;
+
+        if (gameStateID != "")
+        {
+            GameState.SetState(gameStateID, 1);
+        }
 
         // Play death sound
         SoundManager.instance.PlaySound(deathSound);

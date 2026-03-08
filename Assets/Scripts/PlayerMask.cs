@@ -12,6 +12,7 @@ public class PlayerMask : Mask
     private static bool switching;
 
     public static int kills;
+    public static int playerSouls;
 
     public int prefabIndex;
 
@@ -35,6 +36,8 @@ public class PlayerMask : Mask
 
     public float maxInteractDistance;
 
+    private static bool spawnedIn = false;
+
     protected override void Start()
     {
         base.Start();
@@ -56,6 +59,32 @@ public class PlayerMask : Mask
             PlayerInput playerInput = GetComponent<PlayerInput>();
             playerInput.enabled = false;
             playerInput.enabled = true;
+        }
+
+        // Spawn in.
+        if (!PlayerMask.spawnedIn)
+        {
+            PlayerMask.spawnedIn = true;
+
+            int shrineID = GameState.GetState("Shrine");
+
+            if (shrineID == 0) return;
+
+            foreach (Shrine shrine in Shrine.allShrines)
+            {
+                if (shrine.shrineID != shrineID) continue;
+
+                Debug.Log("Spawning in at shrine " + shrineID);
+
+                body.rb.simulated = false; // Disable physics while moving to prevent unwanted collisions
+
+                // Set position and rotation to shrine spawn point.
+                body.transform.position = (Vector3)shrine.GetSpawnPosition();
+                body.transform.rotation = Quaternion.Euler(0.0f, 0.0f, shrine.GetSpawnRotation());
+
+                body.rb.simulated = true; // Re-enable physics
+                break;
+            }
         }
     }
 
@@ -205,12 +234,15 @@ public class PlayerMask : Mask
 
     private void FinishSwitch()
     {
-        float bestDistance = maxSwitchDistance; // Technically should be slightly over max but this is fine and simpler.
+        float bestDistance = float.MaxValue; // Technically should be slightly over max but this is fine and simpler.
         Body bestBody = null;
         Body.allBodies.RemoveAll(item => item == null);
         foreach (Body checkBody in Body.allBodies)
         {
             if (!checkBody || !checkBody.rb || checkBody.IsMasked() || !checkBody.switchable) continue;
+
+            // Check distance from mask to body doesn't exceed maxSwitchDistance.
+            if (Vector2.Distance(transform.position, checkBody.rb.position) > maxSwitchDistance) continue;
 
             if (usingMouse)
             {
@@ -255,12 +287,15 @@ public class PlayerMask : Mask
 
     private void Interact()
     {
-        float bestDistance = maxInteractDistance; // Technically should be slightly over max but this is fine and simpler.
+        float bestDistance = float.MaxValue; // Technically should be slightly over max but this is fine and simpler.
         Interactable bestInteractable = null;
         Interactable.allInteractables.RemoveAll(item => item == null);
         foreach (Interactable checkInteractable in Interactable.allInteractables)
         {
             if (!checkInteractable) continue;
+
+            // Check distance from mask to interactable doesn't exceed maxInteractDistance.
+            if (Vector2.Distance(transform.position, checkInteractable.transform.position) > maxInteractDistance) continue;
 
             if (usingMouse)
             {
@@ -307,8 +342,30 @@ public class PlayerMask : Mask
     {
         PlayerMask.kills = 0;
 
+        PlayerMask.spawnedIn = false;
+
         // Reload the scene if this is the last mask
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public override void AddSouls(int amount)
+    {
+        souls = PlayerMask.playerSouls;
+
+        base.AddSouls(amount);
+
+        PlayerMask.playerSouls = souls;
+    }
+
+    public override bool TryRemoveSouls(int amount, bool force = false, bool checkOnly = false)
+    {
+        souls = PlayerMask.playerSouls;
+
+        bool result = base.TryRemoveSouls(amount, force, checkOnly);
+
+        PlayerMask.playerSouls = souls;
+
+        return result;
     }
 
     public Vector2 GetMousePosition()

@@ -193,8 +193,8 @@ MonoBehaviour:
   bodyTimer: 12
   bodyTimerSlowdownMultiplier: 0.1
   bodyTimerSlowdownDuration: 1
-  maxSwitchDistance: 0
-  maxInteractDistance: 0
+  maxSwitchDistance: 6
+  maxInteractDistance: 2
 --- !u!114 &3685250230627906352
 MonoBehaviour:
   m_ObjectHideFlags: 0
