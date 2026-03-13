@@ -188,13 +188,14 @@ MonoBehaviour:
   controller: 0
   canAim: 1
   statBonuses: []
+  souls: 0
   prefabIndex: 1
   bodyTimerActive: 0
   bodyTimer: 12
   bodyTimerSlowdownMultiplier: 0.1
   bodyTimerSlowdownDuration: 1
-  maxSwitchDistance: 6
-  maxInteractDistance: 2
+  maxSwitchDistance: 12
+  maxInteractDistance: 2.5
 --- !u!114 &3685250230627906352
 MonoBehaviour:
   m_ObjectHideFlags: 0

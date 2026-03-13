@@ -41,6 +41,7 @@ public class Body : MonoBehaviour
     [Space]
 
     public float playerMaskDuration;
+    public Rotator switchIndicator;
 
     [Space]
 
@@ -75,6 +76,8 @@ public class Body : MonoBehaviour
         {
             AddMask(addMaskPrefabOnStart);
         }
+
+        switchIndicator.transform.localPosition = deathIndicator.transform.localPosition;
 
         Body.allBodies.Add(this);
     }
@@ -142,7 +145,7 @@ public class Body : MonoBehaviour
         rotation = Mathf.LerpAngle(rotation, targetRotation, rotateSpeedMultiplier * rotateSpeed * Time.deltaTime);
 
         // Handle death timer
-        if (dying)
+        if (dying && deathTimer > 0.0f)
         {
             deathTimer = Mathf.Max(deathTimer - Time.deltaTime, 0.0f);
 
@@ -339,6 +342,11 @@ public class Body : MonoBehaviour
     {
         float nextRotation = Mathf.LerpAngle(rotation, targetRotation, rotateSpeedMultiplier * rotateSpeed * Time.deltaTime);
         return (nextRotation - rotation) / Time.deltaTime;
+    }
+
+    public bool AllowSwitch()
+    {
+        return rb && !IsMasked() && switchable;
     }
 
     public Mask.MaskTeam GetMaskTeam()

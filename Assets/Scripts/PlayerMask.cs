@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.InputSystem;
@@ -10,6 +11,8 @@ public class PlayerMask : Mask
     [Space]
 
     private static bool switching;
+    private static List<Body> switchableBodies = new();
+    private static Body switchBody;
 
     public static int kills;
     public static int playerSouls;
@@ -156,6 +159,9 @@ public class PlayerMask : Mask
                 Die();
             }
         }
+
+        // Update switch
+        UpdateSwitch();
     }
 
     public void OnMove(InputAction.CallbackContext ctx)
@@ -232,22 +238,54 @@ public class PlayerMask : Mask
         switching = true;
     }
 
-    private void FinishSwitch()
+    private void UpdateSwitch()
     {
-        float bestDistance = float.MaxValue; // Technically should be slightly over max but this is fine and simpler.
-        Body bestBody = null;
-        Body.allBodies.RemoveAll(item => item == null);
+        // Make a copy of the current switchable bodies to check after
+        List<Body> lastSwitchableBodies = new(switchableBodies);
+        lastSwitchableBodies.RemoveAll(item => !item);
+
+        // Refresh the list
+        switchableBodies.Clear();
+
+        // Check for switchable bodies and add them to the list
+        Body.allBodies.RemoveAll(item => !item);
         foreach (Body checkBody in Body.allBodies)
         {
-            if (!checkBody || !checkBody.rb || checkBody.IsMasked() || !checkBody.switchable) continue;
+            if (!checkBody.AllowSwitch()) continue;
 
             // Check distance from mask to body doesn't exceed maxSwitchDistance.
             if (Vector2.Distance(transform.position, checkBody.rb.position) > maxSwitchDistance) continue;
+
+            switchableBodies.Add(checkBody);
+        }
+
+        // Enable indicator on switchable bodies through updating switchBody.
+        UpdateSwitchBody();
+
+        // Disable indicator on bodies that are no longer switchable
+        foreach (Body lastSwitchableBody in lastSwitchableBodies)
+        {
+            if (switchableBodies.Contains(lastSwitchableBody)) continue;
+
+            lastSwitchableBody.switchIndicator.gameObject.SetActive(false);
+        }
+    }
+
+    private void UpdateSwitchBody()
+    {
+        float bestDistance = float.MaxValue;
+        Body bestBody = null;
+        foreach (Body checkBody in switchableBodies)
+        {
+            // Enable switch indicator on switchable bodies
+            checkBody.switchIndicator.gameObject.SetActive(true);
 
             if (usingMouse)
             {
                 Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(mousePositionInput);
                 float distance = Vector2.Distance(checkBody.rb.position, mouseWorldPos);
+
+                UpdateBodySwitchIndicator(checkBody.switchIndicator, distance);
 
                 if (distance >= bestDistance) continue;
 
@@ -259,6 +297,8 @@ public class PlayerMask : Mask
                 Vector2 toCheckBody = (checkBody.rb.position - body.rb.position).normalized;
                 float distance = Vector2.Angle(lookInput, toCheckBody);
 
+                UpdateBodySwitchIndicator(checkBody.switchIndicator, distance);
+
                 if (distance >= bestDistance) continue;
 
                 bestDistance = distance;
@@ -266,18 +306,37 @@ public class PlayerMask : Mask
             }
         }
 
-        if (bestBody)
+        switchBody = bestBody;
+    }
+
+    private void UpdateBodySwitchIndicator(Rotator switchIndicator, float distance)
+    {
+        float t = Mathf.InverseLerp(3.0f, 0.5f, distance);
+        t = t * t;
+
+        float scale = Mathf.Lerp(1.0f, 2.0f, t);
+        switchIndicator.transform.localScale = new Vector3(scale, scale, 1.0f);
+
+        float multiplier = Mathf.Lerp(1.0f, 3.0f, t);
+        switchIndicator.multiplier = multiplier;
+    }
+
+    private void FinishSwitch()
+    {
+        UpdateSwitch();
+
+        if (switchBody)
         {
             // Switch to bestBody
             body.switchable = false;
-            bestBody.AddMask(Prefabs.instance.maskPrefabs[prefabIndex]);
+            switchBody.AddMask(Prefabs.instance.maskPrefabs[prefabIndex]);
             body.RemoveMask(this, true);
 
             // Refresh body timer
-            bodyTimer = bestBody.playerMaskDuration;
+            bodyTimer = switchBody.playerMaskDuration;
 
             // Refresh PlayerInput
-            PlayerInput playerInput = bestBody.masks[0].GetComponent<PlayerInput>();
+            PlayerInput playerInput = switchBody.masks[0].GetComponent<PlayerInput>();
             playerInput.enabled = false;
             playerInput.enabled = true;
         }
@@ -287,9 +346,9 @@ public class PlayerMask : Mask
 
     private void Interact()
     {
-        float bestDistance = float.MaxValue; // Technically should be slightly over max but this is fine and simpler.
+        float bestDistance = float.MaxValue;
         Interactable bestInteractable = null;
-        Interactable.allInteractables.RemoveAll(item => item == null);
+        Interactable.allInteractables.RemoveAll(item => !item);
         foreach (Interactable checkInteractable in Interactable.allInteractables)
         {
             if (!checkInteractable) continue;
